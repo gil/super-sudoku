@@ -63,5 +63,13 @@
   "add_new_collection": "+ 新建合集",
   "enter_new_collection_name": "请输入新数独合集名称：",
   "confirm_clear": "确定要重开这局吗？你的进度将会丢失。",
-  "copied": "已复制"
+  "copied": "已复制",
+  "analyze": "分析",
+  "analyze_title": "数独分析",
+  "analyze_difficulty": "难度",
+  "analyze_score": "评分",
+  "analyze_solvable": "可解",
+  "analyze_unique": "唯一解",
+  "analyze_strategies": "使用的策略",
+  "analyze_no_solution": "此数独无解。"
 }

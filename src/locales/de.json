@@ -63,5 +63,13 @@
   "add_new_collection": "+ Neue Sammlung",
   "enter_new_collection_name": "Geben Sie den Namen der neuen Sudoku-Sammlung ein:",
   "confirm_clear": "Sind Sie sicher, dass Sie dieses Spiel neu starten möchten? Ihr Fortschritt geht verloren.",
-  "copied": "Kopiert"
+  "copied": "Kopiert",
+  "analyze": "Analysieren",
+  "analyze_title": "Sudoku-Analyse",
+  "analyze_difficulty": "Schwierigkeit",
+  "analyze_score": "Punktzahl",
+  "analyze_solvable": "Lösbar",
+  "analyze_unique": "Eindeutige Lösung",
+  "analyze_strategies": "Verwendete Strategien",
+  "analyze_no_solution": "Dieses Sudoku hat keine Lösung."
 }

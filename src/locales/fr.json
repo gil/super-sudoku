@@ -62,5 +62,13 @@
   "add_new_collection": "+ Nouvelle collection",
   "enter_new_collection_name": "Entrez le nom de la nouvelle collection de sudoku :",
   "confirm_clear" : "Êtes-vous sûr de vouloir recommencer cette partie ? Votre progression sera perdue.",
-  "copied" : "Copié"
+  "copied" : "Copié",
+  "analyze" : "Analyser",
+  "analyze_title" : "Analyse du sudoku",
+  "analyze_difficulty" : "Difficulté",
+  "analyze_score" : "Score",
+  "analyze_solvable" : "Résoluble",
+  "analyze_unique" : "Solution unique",
+  "analyze_strategies" : "Stratégies utilisées",
+  "analyze_no_solution" : "Ce sudoku n'a pas de solution."
 }

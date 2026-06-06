@@ -11,6 +11,7 @@ import Button from "src/components/Button";
 import SudokuGame from "src/lib/game/SudokuGame";
 import SudokuMenuNumbers from "src/components/sudoku/SudokuMenuNumbers";
 import SudokuMenuControls from "src/components/sudoku/SudokuMenuControls";
+import SudokuAnalyze from "src/components/sudoku/SudokuAnalyze";
 import {Container} from "src/components/Layout";
 import Shortcuts from "./Game/shortcuts/Shortcuts";
 import Checkbox from "src/components/Checkbox";
@@ -431,6 +432,10 @@ const GameInner: React.FC<{
               <div className="flex gap-2">
                 <LanguageSelector />
                 <DarkModeButton />
+                <SudokuAnalyze
+                  sudoku={sudokuState.current}
+                  disabled={game.state === GameStateMachine.paused}
+                />
                 <ClearGameButton
                   pauseGame={pauseGame}
                   continueGame={continueGame}

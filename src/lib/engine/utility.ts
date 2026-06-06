@@ -78,6 +78,15 @@ export function cellsToSimpleSudoku(cells: Cell[]): SimpleSudoku {
   return simple;
 }
 
+// sudoku-core uses a flat 81-length array, row-major, with null for empty cells.
+export function cellsToBoard(cells: Cell[]): Array<number | null> {
+  const board: Array<number | null> = new Array(81).fill(null);
+  cells.forEach((cell) => {
+    board[cell.y * 9 + cell.x] = cell.number === 0 ? null : cell.number;
+  });
+  return board;
+}
+
 export function stringifySudoku(grid: SimpleSudoku) {
   return grid
     .map((row) => {
