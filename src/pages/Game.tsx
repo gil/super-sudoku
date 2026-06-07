@@ -26,6 +26,8 @@ import {TimerProvider} from "src/context/TimerContext";
 import {useEffect} from "react";
 import {CellCoordinates, SimpleSudoku} from "src/lib/engine/types";
 import {DarkModeButton} from "src/components/DarkModeButton";
+import AnalyzeModal from "src/components/AnalyzeModal";
+import {analyzeSudoku, SudokuAnalysis} from "src/lib/game/analyze";
 import LanguageSelector from "src/components/LanguageSelector";
 import {useTranslation} from "react-i18next";
 import {
@@ -224,6 +226,26 @@ const CenteredContinueButton: React.FC<{visible: boolean; onClick: () => void}> 
     </>
   </div>
 );
+
+const AnalyzeButton: React.FC<{sudoku: SudokuState["current"]}> = ({sudoku}) => {
+  const {t} = useTranslation();
+  const [analysis, setAnalysis] = React.useState<SudokuAnalysis | null>(null);
+
+  const analyze = () => {
+    try {
+      setAnalysis(analyzeSudoku(sudoku));
+    } catch (error) {
+      console.error("Error analyzing sudoku", error);
+    }
+  };
+
+  return (
+    <>
+      <Button onClick={analyze}>{t("analyze")}</Button>
+      {analysis && <AnalyzeModal analysis={analysis} onClose={() => setAnalysis(null)} />}
+    </>
+  );
+};
 
 const DifficultyShow = ({children, ...props}: React.HTMLAttributes<HTMLDivElement>) => (
   <div className="text-white capitalize" {...props}>
@@ -432,6 +454,7 @@ const GameInner: React.FC<{
               <div className="flex gap-2">
                 <LanguageSelector />
                 <DarkModeButton />
+                <AnalyzeButton sudoku={sudokuState.current} />
                 <ClearGameButton
                   pauseGame={pauseGame}
                   continueGame={continueGame}

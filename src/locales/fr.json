@@ -84,5 +84,16 @@
   "hint_tech_HIDDEN_TRIPLE": "Trois chiffres n'apparaissent que dans trois cases d'une unité ; les autres candidats de ces cases peuvent être retirés.",
   "hint_tech_HIDDEN_QUADRUPLE": "Quatre chiffres n'apparaissent que dans quatre cases d'une unité ; les autres candidats de ces cases peuvent être retirés.",
   "hint_tech_LOCKED_PAIR": "Deux cases à l'intersection d'une région et d'une ligne partagent deux candidats, les éliminant ailleurs.",
-  "hint_tech_LOCKED_TRIPLE": "Trois cases à l'intersection d'une région et d'une ligne partagent trois candidats, les éliminant ailleurs."
+  "hint_tech_LOCKED_TRIPLE": "Trois cases à l'intersection d'une région et d'une ligne partagent trois candidats, les éliminant ailleurs.",
+  "analyze": "Analyser",
+  "analyze_title": "Analyse de la grille",
+  "analyze_difficulty": "Difficulté",
+  "analyze_score": "Score",
+  "analyze_solutions": "Solutions",
+  "analyze_solutions_invalid": "Aucune solution",
+  "analyze_solutions_unique": "Unique",
+  "analyze_solutions_multiple": "Multiples",
+  "analyze_techniques": "Techniques utilisées",
+  "analyze_no_techniques": "Aucune technique nécessaire.",
+  "analyze_technique_stats": "{{count}}× · {{score}} pts"
 }

@@ -85,5 +85,16 @@
   "hint_tech_HIDDEN_TRIPLE": "Tre cifre compaiono solo in tre celle di un'unità, quindi gli altri candidati in quelle celle possono essere rimossi.",
   "hint_tech_HIDDEN_QUADRUPLE": "Quattro cifre compaiono solo in quattro celle di un'unità, quindi gli altri candidati in quelle celle possono essere rimossi.",
   "hint_tech_LOCKED_PAIR": "Due celle nell'intersezione di un riquadro e una linea condividono due candidati, eliminandoli altrove.",
-  "hint_tech_LOCKED_TRIPLE": "Tre celle nell'intersezione di un riquadro e una linea condividono tre candidati, eliminandoli altrove."
+  "hint_tech_LOCKED_TRIPLE": "Tre celle nell'intersezione di un riquadro e una linea condividono tre candidati, eliminandoli altrove.",
+  "analyze": "Analizza",
+  "analyze_title": "Analisi del puzzle",
+  "analyze_difficulty": "Difficoltà",
+  "analyze_score": "Punteggio",
+  "analyze_solutions": "Soluzioni",
+  "analyze_solutions_invalid": "Nessuna soluzione",
+  "analyze_solutions_unique": "Unica",
+  "analyze_solutions_multiple": "Multiple",
+  "analyze_techniques": "Tecniche usate",
+  "analyze_no_techniques": "Nessuna tecnica necessaria.",
+  "analyze_technique_stats": "{{count}}× · {{score}} pt"
 }

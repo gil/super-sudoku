@@ -85,5 +85,16 @@
   "hint_tech_HIDDEN_TRIPLE": "Drei Ziffern kommen nur in drei Zellen einer Einheit vor, daher können die anderen Kandidaten in diesen Zellen entfernt werden.",
   "hint_tech_HIDDEN_QUADRUPLE": "Vier Ziffern kommen nur in vier Zellen einer Einheit vor, daher können die anderen Kandidaten in diesen Zellen entfernt werden.",
   "hint_tech_LOCKED_PAIR": "Zwei Zellen in der Überschneidung von Block und Linie teilen zwei Kandidaten und eliminieren sie andernorts.",
-  "hint_tech_LOCKED_TRIPLE": "Drei Zellen in der Überschneidung von Block und Linie teilen drei Kandidaten und eliminieren sie andernorts."
+  "hint_tech_LOCKED_TRIPLE": "Drei Zellen in der Überschneidung von Block und Linie teilen drei Kandidaten und eliminieren sie andernorts.",
+  "analyze": "Analysieren",
+  "analyze_title": "Rätselanalyse",
+  "analyze_difficulty": "Schwierigkeit",
+  "analyze_score": "Punktzahl",
+  "analyze_solutions": "Lösungen",
+  "analyze_solutions_invalid": "Keine Lösung",
+  "analyze_solutions_unique": "Eindeutig",
+  "analyze_solutions_multiple": "Mehrere",
+  "analyze_techniques": "Verwendete Techniken",
+  "analyze_no_techniques": "Keine Techniken nötig.",
+  "analyze_technique_stats": "{{count}}× · {{score}} Pkt."
 }

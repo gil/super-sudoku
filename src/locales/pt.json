@@ -85,5 +85,16 @@
   "hint_tech_HIDDEN_TRIPLE": "Três dígitos aparecem em apenas três células de uma unidade, então os outros candidatos dessas células podem ser removidos.",
   "hint_tech_HIDDEN_QUADRUPLE": "Quatro dígitos aparecem em apenas quatro células de uma unidade, então os outros candidatos dessas células podem ser removidos.",
   "hint_tech_LOCKED_PAIR": "Duas células na interseção de um bloco e uma linha compartilham dois candidatos, eliminando-os em outros lugares.",
-  "hint_tech_LOCKED_TRIPLE": "Três células na interseção de um bloco e uma linha compartilham três candidatos, eliminando-os em outros lugares."
+  "hint_tech_LOCKED_TRIPLE": "Três células na interseção de um bloco e uma linha compartilham três candidatos, eliminando-os em outros lugares.",
+  "analyze": "Analisar",
+  "analyze_title": "Análise do quebra-cabeça",
+  "analyze_difficulty": "Dificuldade",
+  "analyze_score": "Pontuação",
+  "analyze_solutions": "Soluções",
+  "analyze_solutions_invalid": "Sem solução",
+  "analyze_solutions_unique": "Única",
+  "analyze_solutions_multiple": "Múltiplas",
+  "analyze_techniques": "Técnicas usadas",
+  "analyze_no_techniques": "Nenhuma técnica necessária.",
+  "analyze_technique_stats": "{{count}}× · {{score}} pts"
 }

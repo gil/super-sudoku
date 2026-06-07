@@ -85,5 +85,16 @@
   "hint_tech_HIDDEN_TRIPLE": "三个数字只出现在某单元的三个格中，因此这些格中的其他候选数可删除。",
   "hint_tech_HIDDEN_QUADRUPLE": "四个数字只出现在某单元的四个格中，因此这些格中的其他候选数可删除。",
   "hint_tech_LOCKED_PAIR": "宫与线交叠处的两个格共用两个候选数，可在别处删除它们。",
-  "hint_tech_LOCKED_TRIPLE": "宫与线交叠处的三个格共用三个候选数，可在别处删除它们。"
+  "hint_tech_LOCKED_TRIPLE": "宫与线交叠处的三个格共用三个候选数，可在别处删除它们。",
+  "analyze": "分析",
+  "analyze_title": "谜题分析",
+  "analyze_difficulty": "难度",
+  "analyze_score": "评分",
+  "analyze_solutions": "解的数量",
+  "analyze_solutions_invalid": "无解",
+  "analyze_solutions_unique": "唯一",
+  "analyze_solutions_multiple": "多解",
+  "analyze_techniques": "使用的技巧",
+  "analyze_no_techniques": "无需任何技巧。",
+  "analyze_technique_stats": "{{count}}× · {{score}} 分"
 }

@@ -85,5 +85,16 @@
   "hint_tech_HIDDEN_TRIPLE": "Tres cifras aparecen solo en tres celdas de una unidad, así que los demás candidatos de esas celdas pueden eliminarse.",
   "hint_tech_HIDDEN_QUADRUPLE": "Cuatro cifras aparecen solo en cuatro celdas de una unidad, así que los demás candidatos de esas celdas pueden eliminarse.",
   "hint_tech_LOCKED_PAIR": "Dos celdas en la intersección de una caja y una línea comparten dos candidatos, eliminándolos en otros lugares.",
-  "hint_tech_LOCKED_TRIPLE": "Tres celdas en la intersección de una caja y una línea comparten tres candidatos, eliminándolos en otros lugares."
+  "hint_tech_LOCKED_TRIPLE": "Tres celdas en la intersección de una caja y una línea comparten tres candidatos, eliminándolos en otros lugares.",
+  "analyze": "Analizar",
+  "analyze_title": "Análisis del puzle",
+  "analyze_difficulty": "Dificultad",
+  "analyze_score": "Puntuación",
+  "analyze_solutions": "Soluciones",
+  "analyze_solutions_invalid": "Sin solución",
+  "analyze_solutions_unique": "Única",
+  "analyze_solutions_multiple": "Múltiples",
+  "analyze_techniques": "Técnicas usadas",
+  "analyze_no_techniques": "No se necesitan técnicas.",
+  "analyze_technique_stats": "{{count}}× · {{score}} pts"
 }
