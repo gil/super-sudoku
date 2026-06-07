@@ -32,14 +32,8 @@ const BASE_SUDOKU_COLLECTIONS: Record<BaseCollection, string> = {
   [BaseCollection.Evil]: evilSudokus,
 } as const;
 
-// Cache for raw line counts
-const lineCountCache: Record<string, number> = {} as Record<string, number>;
-
 function getLineCount(collection: Collection): number {
-  if (!lineCountCache[collection.id]) {
-    lineCountCache[collection.id] = collection.sudokusRaw.split("\n").filter((line) => line.trim()).length;
-  }
-  return lineCountCache[collection.id];
+  return collection.sudokusRaw.split("\n").filter((line) => line.trim()).length;
 }
 
 export function getSudokusPaginated(collection: Collection, page: number = 0, pageSize: number = 12): PaginatedSudokus {
@@ -98,6 +92,7 @@ export function getCollections() {
 
 export function useSudokuCollections() {
   const [collections, setCollections] = useState<CollectionIndex[]>(getCollections());
+  const [version, setVersion] = useState(0);
 
   const [activeCollectionId, setActiveCollectionId] = useState<string>("easy");
 
@@ -123,6 +118,7 @@ export function useSudokuCollections() {
       sudokusRaw: newSudokusRaw,
     });
     setCollections(getCollections());
+    setVersion((v) => v + 1);
   }, []);
 
   const getCollection = useCallback(
@@ -139,7 +135,11 @@ export function useSudokuCollections() {
     [isBaseCollection],
   );
 
-  const activeCollection = useMemo(() => getCollection(activeCollectionId), [activeCollectionId, getCollection]);
+  const activeCollection = useMemo(
+    () => getCollection(activeCollectionId),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [activeCollectionId, getCollection, version],
+  );
 
   const removeCollection = (collectionId: string) => {
     localStorageCollectionRepository.removeCollection(collectionId);
