@@ -37,7 +37,6 @@ export const INITIAL_CREATE_NEW_SUDOKU_STATE: SudokuState = {
 // Action types
 const SET_SUDOKU = "sudoku/SET_SUDOKU";
 const SET_SUDOKU_STATE = "sudoku/SET_SUDOKU_STATE";
-const GET_HINT = "sudoku/GET_HINT";
 const CLEAR_CELL = "sudoku/CLEAR_CELL";
 const SET_NOTES = "sudoku/SET_NOTES";
 const SET_NUMBER = "sudoku/SET_NUMBER";
@@ -48,7 +47,6 @@ const REDO = "sudoku/REDO";
 type SudokuAction =
   | {type: typeof SET_SUDOKU; sudoku: Cell[]}
   | {type: typeof SET_SUDOKU_STATE; sudokuState: SudokuState}
-  | {type: typeof GET_HINT; cellCoordinates: CellCoordinates}
   | {type: typeof CLEAR_CELL; cellCoordinates: CellCoordinates}
   | {type: typeof SET_NOTES; cellCoordinates: CellCoordinates; notes: number[]}
   | {type: typeof SET_NUMBER; cellCoordinates: CellCoordinates; number: number}
@@ -117,7 +115,6 @@ function sudokuReducer(state: SudokuState, action: SudokuAction): SudokuState {
         };
       }
       return state;
-    case GET_HINT:
     case CLEAR_CELL:
     case SET_NOTES:
     case SET_NUMBER:
@@ -154,13 +151,6 @@ function sudokuReducer(state: SudokuState, action: SudokuAction): SudokuState {
                 notes: [],
               };
             }
-            case GET_HINT: {
-              return {
-                ...cell,
-                number: cell.solution,
-                notes: [],
-              };
-            }
             default:
               return cell;
           }
@@ -193,7 +183,6 @@ interface SudokuContextType {
   state: SudokuState;
   setSudoku: (sudoku: SimpleSudoku, solution: SimpleSudoku) => void;
   setSudokuState: (sudokuState: SudokuState) => void;
-  getHint: (cellCoordinates: CellCoordinates) => void;
   clearCell: (cellCoordinates: CellCoordinates) => void;
   setNotes: (cellCoordinates: CellCoordinates, notes: number[]) => void;
   setNumber: (cellCoordinates: CellCoordinates, number: number) => void;
@@ -219,10 +208,6 @@ export function SudokuProvider({children, initialState = INITIAL_SUDOKU_STATE}: 
 
   const setSudokuState = useCallback((sudokuState: SudokuState) => {
     dispatch({type: SET_SUDOKU_STATE, sudokuState});
-  }, []);
-
-  const getHint = useCallback((cellCoordinates: CellCoordinates) => {
-    dispatch({type: GET_HINT, cellCoordinates});
   }, []);
 
   const clearCell = useCallback((cellCoordinates: CellCoordinates) => {
@@ -253,7 +238,6 @@ export function SudokuProvider({children, initialState = INITIAL_SUDOKU_STATE}: 
     state,
     setSudoku,
     setSudokuState,
-    getHint,
     clearCell,
     setNotes,
     setNumber,

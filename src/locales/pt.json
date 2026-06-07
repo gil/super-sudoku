@@ -13,6 +13,7 @@
   "backspace": "Backspace: Apagar um número",
   "escape": "Escape: Pausar/continuar o jogo",
   "hint": "H: Dica",
+  "reveal": "R: Revelar o número selecionado",
   "note_mode": "N: Entrar/sair do modo de notas",
   "undo": "CTRL + Z: Desfazer",
   "redo": "CTRL + Y: Refazer",
@@ -63,5 +64,11 @@
   "add_new_collection": "+ Nova coleção",
   "enter_new_collection_name": "Digite o nome da nova coleção de sudoku:",
   "confirm_clear": "Tem certeza de que deseja reiniciar este jogo? Seu progresso será perdido.",
-  "copied": "Copiado"
+  "copied": "Copiado",
+  "hint_technique": "Técnica: {{name}}",
+  "hint_show_where": "Mostre-me onde",
+  "hint_reveal_number": "Revelar número",
+  "hint_remove_candidates": "Remover candidatos",
+  "hint_none": "Nenhuma dica disponível no momento.",
+  "hint_generic": "Há uma jogada lógica aqui usando a técnica {{name}}."
 }

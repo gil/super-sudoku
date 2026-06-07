@@ -13,6 +13,7 @@
   "backspace": "Retour arrière : Effacer un chiffre",
   "escape": "Échap : Pause/reprendre la partie",
   "hint": "H : Indice",
+  "reveal": "R : Révéler le chiffre sélectionné",
   "note_mode": "N : Mode note",
   "undo": "CTRL + Z : Annuler",
   "redo": "CTRL + Y : Rétablir",
@@ -62,5 +63,11 @@
   "add_new_collection": "+ Nouvelle collection",
   "enter_new_collection_name": "Entrez le nom de la nouvelle collection de sudoku :",
   "confirm_clear" : "Êtes-vous sûr de vouloir recommencer cette partie ? Votre progression sera perdue.",
-  "copied" : "Copié"
+  "copied" : "Copié",
+  "hint_technique": "Technique : {{name}}",
+  "hint_show_where": "Montre-moi où",
+  "hint_reveal_number": "Révéler le chiffre",
+  "hint_remove_candidates": "Supprimer les candidats",
+  "hint_none": "Aucun indice disponible pour le moment.",
+  "hint_generic": "Il y a ici un coup logique avec la technique {{name}}."
 }

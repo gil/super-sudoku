@@ -14,7 +14,7 @@ interface ShortcutsProps {
   deactivateNotesMode: () => void;
   setNumber: (cell: Cell, number: number) => void;
   clearNumber: (cell: Cell) => void;
-  getHint: (cell: Cell) => void;
+  advanceHint: () => void;
   setNotes: (cell: Cell, notes: number[]) => void;
   undo: () => void;
   redo: () => void;
@@ -35,7 +35,7 @@ const Shortcuts: React.FC<ShortcutsProps> = ({
   deactivateNotesMode,
   setNumber,
   clearNumber,
-  getHint,
+  advanceHint,
   setNotes,
   undo,
   redo,
@@ -66,7 +66,7 @@ const Shortcuts: React.FC<ShortcutsProps> = ({
         deactivateNotesMode={deactivateNotesMode}
         setNumber={setNumber}
         clearNumber={clearNumber}
-        getHint={getHint}
+        advanceHint={advanceHint}
         setNotes={setNotes}
         undo={undo}
         redo={redo}

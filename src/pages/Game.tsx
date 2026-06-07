@@ -11,6 +11,7 @@ import Button from "src/components/Button";
 import SudokuGame from "src/lib/game/SudokuGame";
 import SudokuMenuNumbers from "src/components/sudoku/SudokuMenuNumbers";
 import SudokuMenuControls from "src/components/sudoku/SudokuMenuControls";
+import {useHint} from "src/components/sudoku/useHint";
 import {Container} from "src/components/Layout";
 import Shortcuts from "./Game/shortcuts/Shortcuts";
 import Checkbox from "src/components/Checkbox";
@@ -253,6 +254,7 @@ const SettingsAndInformation = () => {
               <li>{t("backspace")}</li>
               <li>{t("escape")}</li>
               <li>{t("hint")}</li>
+              <li>{t("reveal")}</li>
               <li>{t("note_mode")}</li>
               <li>{t("undo")}</li>
               <li>{t("redo")}</li>
@@ -314,7 +316,6 @@ const GameInner: React.FC<{
   setNumber: (cellCoordinates: CellCoordinates, number: number) => void;
   setNotes: (cellCoordinates: CellCoordinates, notes: number[]) => void;
   clearCell: (cellCoordinates: CellCoordinates) => void;
-  getHint: (cellCoordinates: CellCoordinates) => void;
   undo: () => void;
   redo: () => void;
   game: GameState;
@@ -336,7 +337,6 @@ const GameInner: React.FC<{
   setNumber,
   setNotes,
   clearCell,
-  getHint,
   undo,
   redo,
   game,
@@ -356,6 +356,7 @@ const GameInner: React.FC<{
   const canUndo = sudokuState.historyIndex < sudokuState.history.length - 1;
   const sudoku = sudokuState.current;
   const {t} = useTranslation();
+  const hintFlow = useHint(sudoku, selectCell, setNumber, setNotes);
 
   React.useEffect(() => {
     const isSolved = SudokuGame.isSolved(sudoku);
@@ -404,7 +405,7 @@ const GameInner: React.FC<{
           deactivateNotesMode={deactivateNotesMode}
           setNumber={setNumber}
           clearNumber={clearCell}
-          getHint={getHint}
+          advanceHint={hintFlow.advance}
           setNotes={setNotes}
           undo={undo}
           redo={redo}
@@ -519,7 +520,7 @@ const GameInner: React.FC<{
               clearCell={clearCell}
               activateNotesMode={activateNotesMode}
               deactivateNotesMode={deactivateNotesMode}
-              getHint={getHint}
+              hintFlow={hintFlow}
               canUndo={canUndo}
               undo={undo}
             />
@@ -596,7 +597,6 @@ const GameWithRouteManagement = () => {
     setNumber,
     setNotes,
     clearCell,
-    getHint,
     undo,
     redo,
   } = useSudoku();
@@ -728,7 +728,6 @@ const GameWithRouteManagement = () => {
       setNumber={setNumber}
       setNotes={setNotes}
       clearCell={clearCell}
-      getHint={getHint}
       undo={undo}
       redo={redo}
       game={gameState}

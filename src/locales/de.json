@@ -13,6 +13,7 @@
   "backspace": "Rücktaste: Eine Zahl löschen",
   "escape": "Escape: Spiel pausieren/fortsetzen",
   "hint": "H: Hinweis",
+  "reveal": "R: Ausgewählte Zahl aufdecken",
   "note_mode": "N: Notizmodus betreten/verlassen",
   "undo": "STRG + Z: Rückgängig",
   "redo": "STRG + Y: Wiederholen",
@@ -63,5 +64,11 @@
   "add_new_collection": "+ Neue Sammlung",
   "enter_new_collection_name": "Geben Sie den Namen der neuen Sudoku-Sammlung ein:",
   "confirm_clear": "Sind Sie sicher, dass Sie dieses Spiel neu starten möchten? Ihr Fortschritt geht verloren.",
-  "copied": "Kopiert"
+  "copied": "Kopiert",
+  "hint_technique": "Technik: {{name}}",
+  "hint_show_where": "Zeig mir wo",
+  "hint_reveal_number": "Zahl aufdecken",
+  "hint_remove_candidates": "Kandidaten entfernen",
+  "hint_none": "Im Moment ist kein Hinweis verfügbar.",
+  "hint_generic": "Hier gibt es einen logischen nächsten Zug mit der Technik {{name}}."
 }

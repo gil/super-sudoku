@@ -13,6 +13,7 @@
   "backspace": "退格：删除数字",
   "escape": "Esc：暂停/继续游戏",
   "hint": "H：提示",
+  "reveal": "R：揭示选中的数字",
   "note_mode": "N：进入/退出笔记模式",
   "undo": "CTRL + Z：撤销",
   "redo": "CTRL + Y：重做",
@@ -63,5 +64,11 @@
   "add_new_collection": "+ 新建合集",
   "enter_new_collection_name": "请输入新数独合集名称：",
   "confirm_clear": "确定要重开这局吗？你的进度将会丢失。",
-  "copied": "已复制"
+  "copied": "已复制",
+  "hint_technique": "技巧：{{name}}",
+  "hint_show_where": "告诉我在哪",
+  "hint_reveal_number": "揭示数字",
+  "hint_remove_candidates": "移除候选数",
+  "hint_none": "暂时没有可用的提示。",
+  "hint_generic": "这里有一步用「{{name}}」技巧的合理走法。"
 }

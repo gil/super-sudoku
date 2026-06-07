@@ -68,6 +68,7 @@
   "dependencies": {
     "@tanstack/react-router": "1.121.34",
     "clsx": "2.1.1",
+    "hodoku-ts": "github:gil/HoDoKu-ts#main",
     "hotkeys-js": "3.13.7",
     "i18next": "25.4.2",
     "lodash-es": "4.17.21",
@@ -75,5 +76,10 @@
     "react-dom": "18.3.1",
     "react-i18next": "15.7.2",
     "tailwind-merge": "3.3.1"
+  },
+  "pnpm": {
+    "onlyBuiltDependencies": [
+      "hodoku-ts"
+    ]
   }
 }
