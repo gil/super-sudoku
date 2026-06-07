@@ -5,6 +5,8 @@ export interface NextHint {
   technique: string;
   /** English technique name from hodoku. */
   name: string;
+  /** Difficulty level of the technique (easy | medium | hard | unfair | extreme). */
+  difficulty: string;
   /** Cell to focus on for "Show me where". */
   target: CellCoordinates;
   /** Value to place when the step fills a cell; null for elimination-only steps. */
@@ -37,6 +39,7 @@ function toNextHint(h: HodokuHint): NextHint {
   return {
     technique: h.technique,
     name: h.name,
+    difficulty: h.difficulty,
     target,
     value: placement ? placement.value : null,
     eliminations,

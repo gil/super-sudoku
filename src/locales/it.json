@@ -66,6 +66,7 @@
   "confirm_clear": "Sei sicuro di voler ricominciare questo gioco? Il tuo progresso andrà perso.",
   "copied": "Copiato",
   "hint_technique": "Tecnica: {{name}}",
+  "hint_difficulty": "Difficoltà: {{difficulty}}",
   "hint_show_where": "Mostrami dove",
   "hint_reveal_number": "Rivela il numero",
   "hint_remove_candidates": "Rimuovi candidati",

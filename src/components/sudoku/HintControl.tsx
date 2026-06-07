@@ -3,9 +3,20 @@ import {useTranslation} from "react-i18next";
 import Button from "../Button";
 import {HintFlow} from "./useHint";
 
+const DIFFICULTY_TRANSLATION_KEY: Record<string, string> = {
+  easy: "difficulty_easy",
+  medium: "difficulty_medium",
+  hard: "difficulty_hard",
+  unfair: "difficulty_expert",
+  extreme: "difficulty_evil",
+};
+
 const HintControl: React.FC<{flow: HintFlow}> = ({flow}) => {
   const {t, i18n} = useTranslation();
   const {stage, hint, open, showWhere, reveal, close} = flow;
+
+  const difficultyKey = hint ? DIFFICULTY_TRANSLATION_KEY[hint.difficulty] : undefined;
+  const difficultyLabel = difficultyKey ? t(difficultyKey) : hint?.difficulty;
 
   const descriptionKey = hint ? `hint_tech_${hint.technique}` : "";
   const description =
@@ -56,6 +67,9 @@ const HintControl: React.FC<{flow: HintFlow}> = ({flow}) => {
             <div className="grid gap-3">
               <div>
                 <div className="pr-4 text-sm font-bold">{t("hint_technique", {name: hint.name})}</div>
+                <div className="text-xs capitalize text-gray-500 dark:text-gray-300">
+                  {t("hint_difficulty", {difficulty: difficultyLabel})}
+                </div>
                 <p className="mt-1 text-sm">{description}</p>
               </div>
               {stage === "explain" ? (

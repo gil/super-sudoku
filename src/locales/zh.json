@@ -66,6 +66,7 @@
   "confirm_clear": "确定要重开这局吗？你的进度将会丢失。",
   "copied": "已复制",
   "hint_technique": "技巧：{{name}}",
+  "hint_difficulty": "难度：{{difficulty}}",
   "hint_show_where": "告诉我在哪",
   "hint_reveal_number": "揭示数字",
   "hint_remove_candidates": "移除候选数",

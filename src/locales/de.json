@@ -66,6 +66,7 @@
   "confirm_clear": "Sind Sie sicher, dass Sie dieses Spiel neu starten möchten? Ihr Fortschritt geht verloren.",
   "copied": "Kopiert",
   "hint_technique": "Technik: {{name}}",
+  "hint_difficulty": "Schwierigkeit: {{difficulty}}",
   "hint_show_where": "Zeig mir wo",
   "hint_reveal_number": "Zahl aufdecken",
   "hint_remove_candidates": "Kandidaten entfernen",

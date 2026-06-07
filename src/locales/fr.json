@@ -65,6 +65,7 @@
   "confirm_clear" : "Êtes-vous sûr de vouloir recommencer cette partie ? Votre progression sera perdue.",
   "copied" : "Copié",
   "hint_technique": "Technique : {{name}}",
+  "hint_difficulty": "Difficulté : {{difficulty}}",
   "hint_show_where": "Montre-moi où",
   "hint_reveal_number": "Révéler le chiffre",
   "hint_remove_candidates": "Supprimer les candidats",

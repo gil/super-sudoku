@@ -66,6 +66,7 @@
   "confirm_clear" : "Are you sure you want to restart this game? Your progress will be lost.",
   "copied" : "Copied",
   "hint_technique": "Technique: {{name}}",
+  "hint_difficulty": "Difficulty: {{difficulty}}",
   "hint_show_where": "Show me where",
   "hint_reveal_number": "Reveal number",
   "hint_remove_candidates": "Remove candidates",
