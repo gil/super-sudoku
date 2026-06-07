@@ -309,23 +309,18 @@ const SettingsAndInformation = () => {
           <h2 className="text-3xl font-bold text-white">{t("about")}</h2>
           <p className="text-white">
             {t("about_text")}{" "}
+            <a target="_blank" className="underline" href="https://github.com/gil/super-sudoku" rel="noreferrer">
+              {t("about_fork")}
+            </a>{" "}
+            {t("about_of")}{" "}
             <a target="_blank" className="underline" href="https://github.com/TN1ck/super-sudoku" rel="noreferrer">
-              Github
+              Super Sudoku
             </a>
-            .{" "}
-            <a href="https://tn1ck.com" target="_blank" className="hover:underline" rel="noreferrer">
-              {t("created_by")}
-            </a>
-            {t("report_issue")}{" "}
-            <a
-              target="_blank"
-              className="underline"
-              href="https://github.com/TN1ck/super-sudoku/issues"
-              rel="noreferrer"
-            >
-              Github
-            </a>
-            .
+            {t("about_intelligence")}{" "}
+            <a target="_blank" className="underline" href="https://github.com/gil/HoDoKu-ts" rel="noreferrer">
+              HoDoKu-ts
+            </a>{" "}
+            {t("about_and_more")}
           </p>
         </div>
       </div>

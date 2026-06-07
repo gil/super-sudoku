@@ -14,6 +14,14 @@
 
 Born from a simple request - my Grandma wanted to play Sudoku, but I wasn't satisfied with the available options. This project aims to create an open-source Sudoku experience that matches or exceeds commercial applications, making quality puzzle gaming accessible to everyone.
 
+## 🆕 What's New in This Fork
+
+This is a [fork](https://github.com/gil/super-sudoku) of [Super Sudoku](https://github.com/TN1ck/super-sudoku) by Tom Nick, with added intelligence on top of the original. Highlights beyond upstream:
+
+- **Smart Hints**: Step-by-step hints that name the actual solving technique and its difficulty, powered by [HoDoKu-ts](https://github.com/gil/HoDoKu-ts).
+- **Puzzle Analysis**: Analyze any board to see which techniques are required to solve it.
+- **Solve Path**: Reveal the full sequence of logical steps from the current state to the solution.
+
 ## 🚀 Key Features
 
 ### 🎮 **Core Gameplay**
