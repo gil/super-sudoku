@@ -122,15 +122,24 @@ export function useSudokuCollections() {
   }, []);
 
   const getCollection = useCallback(
-    (collectionId: string) => {
-      if (isBaseCollection(collectionId)) {
+    (collectionIdOrName: string) => {
+      if (isBaseCollection(collectionIdOrName)) {
         return {
-          id: collectionId,
-          name: collectionId,
-          sudokusRaw: BASE_SUDOKU_COLLECTIONS[collectionId as BaseCollection],
+          id: collectionIdOrName,
+          name: collectionIdOrName,
+          sudokusRaw: BASE_SUDOKU_COLLECTIONS[collectionIdOrName as BaseCollection],
         };
       }
-      return localStorageCollectionRepository.getCollection(collectionId);
+      try {
+        return localStorageCollectionRepository.getCollection(collectionIdOrName);
+      } catch {
+        // The game state / URL store the collection name, not the id, so fall back to a name lookup.
+        const match = localStorageCollectionRepository.getCollections().find((c) => c.name === collectionIdOrName);
+        if (!match) {
+          throw new Error("Collection not found");
+        }
+        return localStorageCollectionRepository.getCollection(match.id);
+      }
     },
     [isBaseCollection],
   );
