@@ -87,6 +87,7 @@
   "hint_tech_LOCKED_PAIR": "宫与线交叠处的两个格共用两个候选数，可在别处删除它们。",
   "hint_tech_LOCKED_TRIPLE": "宫与线交叠处的三个格共用三个候选数，可在别处删除它们。",
   "analyze": "分析",
+  "solve": "求解",
   "analyze_title": "谜题分析",
   "analyze_difficulty": "难度",
   "analyze_score": "评分",
@@ -96,5 +97,9 @@
   "analyze_solutions_multiple": "多解",
   "analyze_techniques": "使用的技巧",
   "analyze_no_techniques": "无需任何技巧。",
-  "analyze_technique_stats": "{{count}}× · {{score}} 分"
+  "analyze_technique_stats": "{{count}}× · {{score}} 分",
+  "analyze_tab_overview": "概览",
+  "analyze_tab_steps": "解题步骤",
+  "analyze_solving": "求解中…",
+  "analyze_no_steps": "无可用解题步骤。"
 }

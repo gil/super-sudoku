@@ -87,6 +87,7 @@
   "hint_tech_LOCKED_PAIR": "Duas células na interseção de um bloco e uma linha compartilham dois candidatos, eliminando-os em outros lugares.",
   "hint_tech_LOCKED_TRIPLE": "Três células na interseção de um bloco e uma linha compartilham três candidatos, eliminando-os em outros lugares.",
   "analyze": "Analisar",
+  "solve": "Resolver",
   "analyze_title": "Análise do quebra-cabeça",
   "analyze_difficulty": "Dificuldade",
   "analyze_score": "Pontuação",
@@ -96,5 +97,9 @@
   "analyze_solutions_multiple": "Múltiplas",
   "analyze_techniques": "Técnicas usadas",
   "analyze_no_techniques": "Nenhuma técnica necessária.",
-  "analyze_technique_stats": "{{count}}× · {{score}} pts"
+  "analyze_technique_stats": "{{count}}× · {{score}} pts",
+  "analyze_tab_overview": "Visão geral",
+  "analyze_tab_steps": "Resolução",
+  "analyze_solving": "Resolvendo…",
+  "analyze_no_steps": "Nenhum passo de resolução disponível."
 }

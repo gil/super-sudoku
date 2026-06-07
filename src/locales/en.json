@@ -87,6 +87,7 @@
   "hint_tech_LOCKED_PAIR": "Two cells in the overlap of a box and a line share two candidates, eliminating them elsewhere.",
   "hint_tech_LOCKED_TRIPLE": "Three cells in the overlap of a box and a line share three candidates, eliminating them elsewhere.",
   "analyze": "Analyze",
+  "solve": "Solve",
   "analyze_title": "Puzzle Analysis",
   "analyze_difficulty": "Difficulty",
   "analyze_score": "Score",
@@ -96,5 +97,9 @@
   "analyze_solutions_multiple": "Multiple",
   "analyze_techniques": "Techniques used",
   "analyze_no_techniques": "No techniques needed.",
-  "analyze_technique_stats": "{{count}}× · {{score}} pts"
+  "analyze_technique_stats": "{{count}}× · {{score}} pts",
+  "analyze_tab_overview": "Overview",
+  "analyze_tab_steps": "Solve path",
+  "analyze_solving": "Solving…",
+  "analyze_no_steps": "No solving steps available."
 }

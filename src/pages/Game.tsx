@@ -27,7 +27,8 @@ import {useEffect} from "react";
 import {CellCoordinates, SimpleSudoku} from "src/lib/engine/types";
 import {DarkModeButton} from "src/components/DarkModeButton";
 import AnalyzeModal from "src/components/AnalyzeModal";
-import {analyzeSudoku, SudokuAnalysis} from "src/lib/game/analyze";
+import SolvePathPanel from "src/components/SolvePathPanel";
+import {analyzeSudoku, solveSteps, SolveStep, SudokuAnalysis} from "src/lib/game/analyze";
 import LanguageSelector from "src/components/LanguageSelector";
 import {useTranslation} from "react-i18next";
 import {
@@ -380,6 +381,30 @@ const GameInner: React.FC<{
   const {t} = useTranslation();
   const hintFlow = useHint(sudoku, selectCell, setNumber, setNotes);
 
+  const [showSolvePath, setShowSolvePath] = React.useState(false);
+  const [solvePath, setSolvePath] = React.useState<SolveStep[] | null>(null);
+  const [solving, setSolving] = React.useState(false);
+
+  const handleSolvePath = () => {
+    if (showSolvePath) {
+      setShowSolvePath(false);
+      return;
+    }
+    setShowSolvePath(true);
+    setSolvePath(null);
+    setSolving(true);
+    // Defer so the loading state paints before the (blocking) solve runs.
+    setTimeout(() => {
+      try {
+        setSolvePath(solveSteps(sudoku));
+      } catch (error) {
+        console.error("Error solving sudoku", error);
+        setSolvePath([]);
+      }
+      setSolving(false);
+    }, 0);
+  };
+
   React.useEffect(() => {
     const isSolved = SudokuGame.isSolved(sudoku);
     if (isSolved) {
@@ -455,6 +480,9 @@ const GameInner: React.FC<{
                 <LanguageSelector />
                 <DarkModeButton />
                 <AnalyzeButton sudoku={sudokuState.current} />
+                <Button active={showSolvePath} onClick={handleSolvePath}>
+                  {t("solve")}
+                </Button>
                 <ClearGameButton
                   pauseGame={pauseGame}
                   continueGame={continueGame}
@@ -547,6 +575,9 @@ const GameInner: React.FC<{
               canUndo={canUndo}
               undo={undo}
             />
+            {showSolvePath && (
+              <SolvePathPanel steps={solvePath} solving={solving} onClose={() => setShowSolvePath(false)} />
+            )}
             <SettingsAndInformation />
           </div>
         </div>

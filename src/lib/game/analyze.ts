@@ -1,4 +1,4 @@
-import {rate, countSolutions, summarize, type Difficulty} from "hodoku-ts";
+import {rate, countSolutions, summarize, solve, type Difficulty} from "hodoku-ts";
 import {Cell} from "src/lib/engine/types";
 
 export interface TechniqueUsage {
@@ -6,6 +6,22 @@ export interface TechniqueUsage {
   name: string;
   count: number;
   totalScore: number;
+}
+
+export interface SolveCellRef {
+  row: number;
+  col: number;
+  value: number;
+}
+
+export interface SolveStep {
+  technique: string;
+  name: string;
+  difficulty: Difficulty;
+  score: number;
+  explanation: string;
+  placements: SolveCellRef[];
+  eliminations: SolveCellRef[];
 }
 
 export interface SudokuAnalysis {
@@ -35,4 +51,18 @@ export function analyzeSudoku(cells: Cell[]): SudokuAnalysis {
   const solutionCount = countSolutions(board);
   const techniques = summarize(board);
   return {score, difficulty, solved, solutionCount, techniques};
+}
+
+/** Full step-by-step solve path. Expensive — compute on demand. */
+export function solveSteps(cells: Cell[]): SolveStep[] {
+  const board = initialBoardString(cells);
+  return solve(board).steps.map((step) => ({
+    technique: step.technique,
+    name: step.name,
+    difficulty: step.difficulty,
+    score: step.score,
+    explanation: step.explanation,
+    placements: step.placements.map((p) => ({row: p.row, col: p.col, value: p.value})),
+    eliminations: step.eliminations.map((e) => ({row: e.row, col: e.col, value: e.value})),
+  }));
 }

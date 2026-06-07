@@ -87,6 +87,7 @@
   "hint_tech_LOCKED_PAIR": "Zwei Zellen in der Überschneidung von Block und Linie teilen zwei Kandidaten und eliminieren sie andernorts.",
   "hint_tech_LOCKED_TRIPLE": "Drei Zellen in der Überschneidung von Block und Linie teilen drei Kandidaten und eliminieren sie andernorts.",
   "analyze": "Analysieren",
+  "solve": "Lösen",
   "analyze_title": "Rätselanalyse",
   "analyze_difficulty": "Schwierigkeit",
   "analyze_score": "Punktzahl",
@@ -96,5 +97,9 @@
   "analyze_solutions_multiple": "Mehrere",
   "analyze_techniques": "Verwendete Techniken",
   "analyze_no_techniques": "Keine Techniken nötig.",
-  "analyze_technique_stats": "{{count}}× · {{score}} Pkt."
+  "analyze_technique_stats": "{{count}}× · {{score}} Pkt.",
+  "analyze_tab_overview": "Übersicht",
+  "analyze_tab_steps": "Lösungsweg",
+  "analyze_solving": "Wird gelöst…",
+  "analyze_no_steps": "Keine Lösungsschritte verfügbar."
 }
