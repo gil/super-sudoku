@@ -25,6 +25,8 @@ This is a [fork](https://github.com/gil/super-sudoku) of [Super Sudoku](https://
 - **Import Sudoku**: New button to import sudoku into a collection.
 - **Bug Fixes**: Various bug fixes.
 
+**Important:** Because of the new dependency on HoDoKu-ts, this project needs to be relicensed as GPL-3.0 so most of the new features unfortunately cannot be pushed upstream.
+
 ## 🚀 Key Features
 
 ### 🎮 **Core Gameplay**
