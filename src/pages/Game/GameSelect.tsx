@@ -5,7 +5,7 @@ import {DIFFICULTY, SimpleSudoku} from "src/lib/engine/types";
 import {generatePuzzle} from "src/lib/game/analyze";
 import SudokuPreview from "../../components/sudoku/SudokuPreview";
 import {formatDuration} from "src/utils/format";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import Button from "src/components/Button";
 import {parseSudoku, stringifySudoku} from "src/lib/engine/utility";
 import {useElementWidth} from "src/utils/hooks";
@@ -14,6 +14,16 @@ import {localStoragePlayedSudokuRepository, StoredPlayedSudokuState} from "src/l
 import {Collection, translateCollectionName} from "src/lib/database/collections";
 import NewSudoku from "./NewSudoku";
 import {useTranslation} from "react-i18next";
+import {SudokuRating, useSudokuRatings} from "src/utils/useSudokuRatings";
+
+const DIFFICULTY_BADGE_COLOR: Record<string, string> = {
+  easy: "bg-green-700",
+  medium: "bg-teal-700",
+  hard: "bg-yellow-700",
+  unfair: "bg-orange-700",
+  extreme: "bg-red-700",
+  incomplete: "bg-gray-700",
+};
 
 const TabItem = ({active, children, ...props}: React.ButtonHTMLAttributes<HTMLButtonElement> & {active: boolean}) => (
   <button
@@ -103,11 +113,13 @@ const SudokuToSelect = ({
   index,
   sudokuCollectionName,
   storedSudoku,
+  rating,
 }: {
   sudoku: SudokuRaw;
   storedSudoku: StoredPlayedSudokuState | undefined;
   index: number;
   sudokuCollectionName: string;
+  rating: SudokuRating | undefined;
 }) => {
   const localSudoku = storedSudoku;
   const unfinished = localSudoku && !localSudoku.game.won;
@@ -139,6 +151,15 @@ const SudokuToSelect = ({
 
   return (
     <div className="relative" ref={sudokuContainerRef}>
+      {rating && (
+        <div
+          className={`pointer-events-none absolute right-2 top-2 z-10 rounded-sm px-2 py-1 text-xs text-white md:text-sm ${
+            DIFFICULTY_BADGE_COLOR[rating.difficulty] ?? "bg-gray-700"
+          }`}
+        >
+          <span className="capitalize">{rating.difficulty}</span> · {rating.score}
+        </div>
+      )}
       {unfinished || finished ? (
         <div className="pointer-events-none absolute left-2 rounded-sm bottom-2 z-10 max-w-min bg-gray-900 px-2 py-1 text-xs text-white md:text-base">
           <div>
@@ -184,10 +205,12 @@ const GameIndex = ({
   pageSudokus,
   pageStart,
   sudokuCollectionName,
+  ratings,
 }: {
   pageSudokus: SudokuRaw[];
   pageStart: number;
   sudokuCollectionName: string;
+  ratings: Record<string, SudokuRating>;
 }) => {
   const {t} = useTranslation();
 
@@ -210,6 +233,7 @@ const GameIndex = ({
               index={globalIndex}
               sudokuCollectionName={sudokuCollectionName}
               storedSudoku={storedSudoku}
+              rating={ratings[sudokuKey]}
             />
           );
         })}
@@ -238,6 +262,17 @@ const GameSelect: React.FC = () => {
   const pageSize = 12;
   const {sudokus: pageSudokus, totalPages: pageCount} = usePaginatedSudokus(activeCollection, page, pageSize);
   const pageStart = page * pageSize;
+
+  const {ratings, requestRatings} = useSudokuRatings();
+
+  useEffect(() => {
+    requestRatings(
+      pageSudokus.map((sudoku) => {
+        const key = stringifySudoku(sudoku.sudoku);
+        return {key, board: key.replace(/0/g, ".")};
+      }),
+    );
+  }, [pageSudokus, requestRatings]);
 
   const setActiveCollectionAndResetPage = (collection: string) => {
     setActiveCollectionId(collection);
@@ -374,7 +409,12 @@ const GameSelect: React.FC = () => {
           <NewSudoku saveSudoku={saveSudoku} />
         </div>
       )}
-      <GameIndex pageSudokus={pageSudokus} pageStart={pageStart} sudokuCollectionName={activeCollection.name} />
+      <GameIndex
+        pageSudokus={pageSudokus}
+        pageStart={pageStart}
+        sudokuCollectionName={activeCollection.name}
+        ratings={ratings}
+      />
       {pageCount > 1 && <PageSelector page={page} pageCount={pageCount} setPage={setPage} />}
     </div>
   );
