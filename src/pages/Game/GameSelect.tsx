@@ -1,7 +1,8 @@
 import * as React from "react";
 
 import {getSudokusPaginated, SudokuRaw, useSudokuCollections} from "src/lib/game/sudokus";
-import {SimpleSudoku} from "src/lib/engine/types";
+import {DIFFICULTY, SimpleSudoku} from "src/lib/engine/types";
+import {generatePuzzle} from "src/lib/game/analyze";
 import SudokuPreview from "../../components/sudoku/SudokuPreview";
 import {formatDuration} from "src/utils/format";
 import {useState} from "react";
@@ -250,6 +251,25 @@ const GameSelect: React.FC = () => {
     setShowNewSudokuComponent(false);
   };
 
+  const [generateDifficulty, setGenerateDifficulty] = useState<DIFFICULTY>(DIFFICULTY.EASY);
+  const [isGenerating, setIsGenerating] = useState(false);
+
+  const generateSudokuLocal = () => {
+    setIsGenerating(true);
+    // Defer so the disabled/loading state paints before the synchronous generator blocks the thread.
+    setTimeout(() => {
+      try {
+        const sudoku = generatePuzzle(generateDifficulty);
+        addSudokuToCollection(activeCollection.id, sudoku);
+        setShowNewSudokuComponent(false);
+      } catch (e) {
+        alert(t("generate_sudoku_failed", {error: e instanceof Error ? e.message : String(e)}));
+      } finally {
+        setIsGenerating(false);
+      }
+    }, 0);
+  };
+
   const importSudoku = () => {
     const input = prompt(t("import_sudoku_prompt"));
     if (!input) {
@@ -314,7 +334,7 @@ const GameSelect: React.FC = () => {
       </div>
       {!isBaseCollectionLocal && (
         <div className="flex justify-between items-center gap-2 mb-4">
-          <div className="flex gap-2">
+          <div className="flex flex-wrap gap-2 items-center">
             {!showNewSudokuComponent ? (
               <Button
                 className="bg-teal-600 dark:bg-teal-600 text-white"
@@ -326,6 +346,20 @@ const GameSelect: React.FC = () => {
               <Button onClick={() => setShowNewSudokuComponent(false)}>{t("close_new_sudoku_creator")}</Button>
             )}
             <Button onClick={importSudoku}>{t("import_sudoku")}</Button>
+            <Button onClick={generateSudokuLocal} disabled={isGenerating}>
+              {isGenerating ? t("generate_sudoku_loading") : t("generate_sudoku")}
+            </Button>
+            <select
+              className="rounded-sm border border-gray-700 bg-gray-900 text-white px-2 py-2 text-xs sm:text-sm"
+              value={generateDifficulty}
+              onChange={(e) => setGenerateDifficulty(e.target.value as DIFFICULTY)}
+            >
+              {Object.values(DIFFICULTY).map((difficulty) => (
+                <option key={difficulty} value={difficulty}>
+                  {t(`difficulty_${difficulty}`)}
+                </option>
+              ))}
+            </select>
           </div>
           <Button onClick={removeCollectionLocal}>{t("delete_collection")}</Button>
         </div>

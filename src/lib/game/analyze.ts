@@ -1,5 +1,6 @@
-import {rate, countSolutions, summarize, solve, type Difficulty} from "hodoku-ts";
-import {Cell} from "src/lib/engine/types";
+import {generate, rate, countSolutions, summarize, solve, type Difficulty} from "hodoku-ts";
+import {Cell, DIFFICULTY, SimpleSudoku} from "src/lib/engine/types";
+import {parseSudoku} from "src/lib/engine/utility";
 
 export interface TechniqueUsage {
   technique: string;
@@ -31,6 +32,23 @@ export interface SudokuAnalysis {
   /** 0 = invalid, 1 = unique, >= 2 = multiple solutions. */
   solutionCount: number;
   techniques: TechniqueUsage[];
+}
+
+const DIFFICULTY_TO_HODOKU: Record<DIFFICULTY, Difficulty> = {
+  [DIFFICULTY.EASY]: "easy",
+  [DIFFICULTY.MEDIUM]: "medium",
+  [DIFFICULTY.HARD]: "hard",
+  [DIFFICULTY.EXPERT]: "unfair",
+  [DIFFICULTY.EVIL]: "extreme",
+};
+
+/** Generates a fresh puzzle at the requested difficulty using HoDoKu's rated generator. */
+export function generatePuzzle(difficulty: DIFFICULTY): SimpleSudoku {
+  const result = generate({difficulty: DIFFICULTY_TO_HODOKU[difficulty]});
+  if (!result) {
+    throw new Error(`Could not generate a ${difficulty} sudoku`);
+  }
+  return parseSudoku(result.givens.replace(/\./g, "0"));
 }
 
 /** Builds the 81-char board string from the puzzle's given clues. */
