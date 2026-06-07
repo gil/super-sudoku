@@ -6,7 +6,7 @@ import SudokuPreview from "../../components/sudoku/SudokuPreview";
 import {formatDuration} from "src/utils/format";
 import {useState} from "react";
 import Button from "src/components/Button";
-import {stringifySudoku} from "src/lib/engine/utility";
+import {parseSudoku, stringifySudoku} from "src/lib/engine/utility";
 import {useElementWidth} from "src/utils/hooks";
 import {useNavigate} from "@tanstack/react-router";
 import {localStoragePlayedSudokuRepository, StoredPlayedSudokuState} from "src/lib/database/playedSudokus";
@@ -250,6 +250,21 @@ const GameSelect: React.FC = () => {
     setShowNewSudokuComponent(false);
   };
 
+  const importSudoku = () => {
+    const input = prompt(t("import_sudoku_prompt"));
+    if (!input) {
+      return;
+    }
+    const normalized = input.replace(/[\s.]/g, (c) => (c === "." ? "0" : ""));
+    try {
+      const sudoku = parseSudoku(normalized);
+      addSudokuToCollection(activeCollection.id, sudoku);
+      setShowNewSudokuComponent(false);
+    } catch (e) {
+      alert(t("import_sudoku_invalid", {error: e instanceof Error ? e.message : String(e)}));
+    }
+  };
+
   const [showNewSudokuComponent, setShowNewSudokuComponent] = useState(false);
   const removeCollectionLocal = () => {
     if (isBaseCollectionLocal) {
@@ -299,13 +314,19 @@ const GameSelect: React.FC = () => {
       </div>
       {!isBaseCollectionLocal && (
         <div className="flex justify-between items-center gap-2 mb-4">
-          {!showNewSudokuComponent ? (
-            <Button className="bg-teal-600 dark:bg-teal-600 text-white" onClick={() => setShowNewSudokuComponent(true)}>
-              {t("add_sudoku")}
-            </Button>
-          ) : (
-            <Button onClick={() => setShowNewSudokuComponent(false)}>{t("close_new_sudoku_creator")}</Button>
-          )}
+          <div className="flex gap-2">
+            {!showNewSudokuComponent ? (
+              <Button
+                className="bg-teal-600 dark:bg-teal-600 text-white"
+                onClick={() => setShowNewSudokuComponent(true)}
+              >
+                {t("add_sudoku")}
+              </Button>
+            ) : (
+              <Button onClick={() => setShowNewSudokuComponent(false)}>{t("close_new_sudoku_creator")}</Button>
+            )}
+            <Button onClick={importSudoku}>{t("import_sudoku")}</Button>
+          </div>
           <Button onClick={removeCollectionLocal}>{t("delete_collection")}</Button>
         </div>
       )}
