@@ -70,6 +70,8 @@
   "generate_sudoku_failed": "Could not generate sudoku: {{error}}",
   "close_new_sudoku_creator": "Close new sudoku creator",
   "delete_collection": "Delete collection",
+  "remove_sudoku": "Remove sudoku from collection",
+  "confirm_remove_sudoku": "Are you sure you want to remove this sudoku from the collection?",
   "create_new_sudoku": "Create new sudoku",
   "close": "Close",
   "add_your_own_sudoku": "Add your own sudoku. Set the numbers and you can play it. This sudoku will be added to the \"{{collection}}\" collection.",

@@ -65,6 +65,8 @@
   "generate_sudoku_failed": "Não foi possível gerar o sudoku: {{error}}",
   "close_new_sudoku_creator": "Fechar criador de novo sudoku",
   "delete_collection": "Excluir coleção",
+  "remove_sudoku": "Remover sudoku da coleção",
+  "confirm_remove_sudoku": "Tem certeza de que deseja remover este sudoku da coleção?",
   "create_new_sudoku": "Criar novo sudoku",
   "close": "Fechar",
   "add_your_own_sudoku": "Adicione seu próprio sudoku. Defina os números e você poderá jogá-lo. Este sudoku será adicionado à coleção \"{{collection}}\".",

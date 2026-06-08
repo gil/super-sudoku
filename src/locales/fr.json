@@ -64,6 +64,8 @@
   "generate_sudoku_failed": "Impossible de générer le sudoku : {{error}}",
   "close_new_sudoku_creator": "Fermer le créateur de sudoku",
   "delete_collection": "Supprimer la collection",
+  "remove_sudoku": "Retirer le sudoku de la collection",
+  "confirm_remove_sudoku": "Voulez-vous vraiment retirer ce sudoku de la collection ?",
   "create_new_sudoku": "Créer un nouveau sudoku",
   "close": "Fermer",
   "add_your_own_sudoku": "Ajoutez votre propre sudoku. Définissez les chiffres et vous pourrez y jouer. Ce sudoku sera ajouté à la collection \"{{collection}}\".",

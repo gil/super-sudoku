@@ -136,6 +136,21 @@ export function useSudokuCollections() {
     setVersion((v) => v + 1);
   }, []);
 
+  const removeSudokuFromCollection = useCallback(async (collectionId: string, index: number) => {
+    const collection = collectionRepository.getCollection(collectionId);
+    const lines = collection.sudokusRaw.split("\n").filter((line) => line.trim());
+    if (index < 0 || index >= lines.length) {
+      return;
+    }
+    lines.splice(index, 1);
+    await collectionRepository.saveCollection({
+      ...collection,
+      sudokusRaw: lines.join("\n"),
+    });
+    setCollections(getCollections());
+    setVersion((v) => v + 1);
+  }, []);
+
   const getCollection = useCallback(
     (collectionIdOrName: string) => {
       if (isBaseCollection(collectionIdOrName)) {
@@ -178,6 +193,7 @@ export function useSudokuCollections() {
     removeCollection,
     addSudokuToCollection,
     addSudokusToCollection,
+    removeSudokuFromCollection,
     isBaseCollection,
     getCollection,
     activeCollection,

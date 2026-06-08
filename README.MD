@@ -21,9 +21,8 @@ This is a [fork](https://github.com/gil/super-sudoku) of [Super Sudoku](https://
 - **Smart Hints**: Step-by-step hints that name the actual solving technique and its difficulty, powered by [HoDoKu-ts](https://github.com/gil/HoDoKu-ts).
 - **Puzzle Analysis**: Analyze any board to see which techniques are required to solve it.
 - **Solve Path**: Reveal the full sequence of logical steps from the current state to the solution.
-- **Generate Sudoku**: New button to generate sudokus for various difficulties.
-- **Import Sudoku**: New button to import sudoku into a collection.
-- **IndexedDB**: We now support much larger collections.
+- **Generate Sudoku**: Generate sudokus for various difficulties.
+- **Collection Improvements**: Import sudoku into a collection, delete, difficulty rating, and IndexedDB to support collections with thousands of puzzles.
 - **Bug Fixes**: Various bug fixes.
 
 **Important:** Because of the new dependency on HoDoKu-ts, this project needs to be relicensed as GPL-3.0 so most of the new features unfortunately cannot be pushed upstream.

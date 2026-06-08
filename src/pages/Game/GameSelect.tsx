@@ -115,12 +115,14 @@ const SudokuToSelect = ({
   sudokuCollectionName,
   storedSudoku,
   rating,
+  onRemove,
 }: {
   sudoku: SudokuRaw;
   storedSudoku: StoredPlayedSudokuState | undefined;
   index: number;
   sudokuCollectionName: string;
   rating: SudokuRating | undefined;
+  onRemove?: () => void;
 }) => {
   const localSudoku = storedSudoku;
   const unfinished = localSudoku && !localSudoku.game.won;
@@ -151,7 +153,22 @@ const SudokuToSelect = ({
   const size = useElementWidth(sudokuContainerRef);
 
   return (
-    <div className="relative" ref={sudokuContainerRef}>
+    <div className="group/card relative" ref={sudokuContainerRef}>
+      {onRemove && (
+        <button
+          aria-label={t("remove_sudoku")}
+          title={t("remove_sudoku")}
+          className="absolute left-2 top-2 z-30 flex h-7 w-7 items-center justify-center rounded-sm border-none bg-gray-900/80 text-white pointer opacity-0 transition-opacity group-hover/card:opacity-100 hover:bg-red-700"
+          onClick={(e) => {
+            e.stopPropagation();
+            if (confirm(t("confirm_remove_sudoku"))) {
+              onRemove();
+            }
+          }}
+        >
+          ✕
+        </button>
+      )}
       {rating && (
         <div
           className={`pointer-events-none absolute right-2 top-2 z-10 rounded-sm px-2 py-1 text-xs text-white md:text-sm ${
@@ -207,11 +224,13 @@ const GameIndex = ({
   pageStart,
   sudokuCollectionName,
   ratings,
+  onRemoveSudoku,
 }: {
   pageSudokus: SudokuRaw[];
   pageStart: number;
   sudokuCollectionName: string;
   ratings: Record<string, SudokuRating>;
+  onRemoveSudoku?: (index: number) => void;
 }) => {
   const {t} = useTranslation();
 
@@ -235,6 +254,7 @@ const GameIndex = ({
               sudokuCollectionName={sudokuCollectionName}
               storedSudoku={storedSudoku}
               rating={ratings[sudokuKey]}
+              onRemove={onRemoveSudoku ? () => onRemoveSudoku(globalIndex) : undefined}
             />
           );
         })}
@@ -259,6 +279,7 @@ const GameSelect: React.FC = () => {
     isBaseCollection,
     addSudokuToCollection,
     addSudokusToCollection,
+    removeSudokuFromCollection,
     removeCollection,
   } = useSudokuCollections();
   const [page, setPage] = useState(0);
@@ -332,6 +353,14 @@ const GameSelect: React.FC = () => {
     removeCollection(activeCollection.id);
     setActiveCollectionId(collections[0].id);
     setPage(0);
+  };
+
+  const removeSudokuLocal = async (index: number) => {
+    await removeSudokuFromCollection(activeCollection.id, index);
+    // Removing the last sudoku on the final page would leave us on an empty page.
+    if (index === pageStart && pageSudokus.length === 1 && page > 0) {
+      setPage((p) => p - 1);
+    }
   };
 
   const isBaseCollectionLocal = isBaseCollection(activeCollection.id);
@@ -411,6 +440,7 @@ const GameSelect: React.FC = () => {
         pageStart={pageStart}
         sudokuCollectionName={activeCollection.name}
         ratings={ratings}
+        onRemoveSudoku={isBaseCollectionLocal ? undefined : removeSudokuLocal}
       />
       {pageCount > 1 && <PageSelector page={page} pageCount={pageCount} setPage={setPage} />}
       {showImportModal && (
