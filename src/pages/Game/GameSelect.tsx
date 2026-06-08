@@ -7,12 +7,13 @@ import SudokuPreview from "../../components/sudoku/SudokuPreview";
 import {formatDuration} from "src/utils/format";
 import {useEffect, useState} from "react";
 import Button from "src/components/Button";
-import {parseSudoku, stringifySudoku} from "src/lib/engine/utility";
+import {stringifySudoku} from "src/lib/engine/utility";
 import {useElementWidth} from "src/utils/hooks";
 import {useNavigate} from "@tanstack/react-router";
 import {localStoragePlayedSudokuRepository, StoredPlayedSudokuState} from "src/lib/database/playedSudokus";
 import {Collection, translateCollectionName} from "src/lib/database/collections";
 import NewSudoku from "./NewSudoku";
+import ImportSudokuModal from "src/components/ImportSudokuModal";
 import {useTranslation} from "react-i18next";
 import {SudokuRating, useSudokuRatings} from "src/utils/useSudokuRatings";
 
@@ -254,6 +255,7 @@ const GameSelect: React.FC = () => {
     addCollection,
     isBaseCollection,
     addSudokuToCollection,
+    addSudokusToCollection,
     removeCollection,
   } = useSudokuCollections();
   const [page, setPage] = useState(0);
@@ -281,7 +283,7 @@ const GameSelect: React.FC = () => {
   };
 
   const saveSudoku = async (sudoku: SimpleSudoku) => {
-    addSudokuToCollection(activeCollection.id, sudoku);
+    await addSudokuToCollection(activeCollection.id, sudoku);
     // TODO: add a toast notification
     setShowNewSudokuComponent(false);
   };
@@ -292,10 +294,10 @@ const GameSelect: React.FC = () => {
   const generateSudokuLocal = () => {
     setIsGenerating(true);
     // Defer so the disabled/loading state paints before the synchronous generator blocks the thread.
-    setTimeout(() => {
+    setTimeout(async () => {
       try {
         const sudoku = generatePuzzle(generateDifficulty);
-        addSudokuToCollection(activeCollection.id, sudoku);
+        await addSudokuToCollection(activeCollection.id, sudoku);
         setShowNewSudokuComponent(false);
       } catch (e) {
         alert(t("generate_sudoku_failed", {error: e instanceof Error ? e.message : String(e)}));
@@ -305,19 +307,11 @@ const GameSelect: React.FC = () => {
     }, 0);
   };
 
-  const importSudoku = () => {
-    const input = prompt(t("import_sudoku_prompt"));
-    if (!input) {
-      return;
-    }
-    const normalized = input.replace(/[\s.]/g, (c) => (c === "." ? "0" : ""));
-    try {
-      const sudoku = parseSudoku(normalized);
-      addSudokuToCollection(activeCollection.id, sudoku);
-      setShowNewSudokuComponent(false);
-    } catch (e) {
-      alert(t("import_sudoku_invalid", {error: e instanceof Error ? e.message : String(e)}));
-    }
+  const [showImportModal, setShowImportModal] = useState(false);
+
+  const importSudokus = async (sudokus: SimpleSudoku[]) => {
+    await addSudokusToCollection(activeCollection.id, sudokus);
+    setShowNewSudokuComponent(false);
   };
 
   const [showNewSudokuComponent, setShowNewSudokuComponent] = useState(false);
@@ -380,7 +374,7 @@ const GameSelect: React.FC = () => {
             ) : (
               <Button onClick={() => setShowNewSudokuComponent(false)}>{t("close_new_sudoku_creator")}</Button>
             )}
-            <Button onClick={importSudoku}>{t("import_sudoku")}</Button>
+            <Button onClick={() => setShowImportModal(true)}>{t("import_sudoku")}</Button>
             <Button onClick={generateSudokuLocal} disabled={isGenerating}>
               {isGenerating ? t("generate_sudoku_loading") : t("generate_sudoku")}
             </Button>
@@ -416,6 +410,9 @@ const GameSelect: React.FC = () => {
         ratings={ratings}
       />
       {pageCount > 1 && <PageSelector page={page} pageCount={pageCount} setPage={setPage} />}
+      {showImportModal && (
+        <ImportSudokuModal onImport={importSudokus} onClose={() => setShowImportModal(false)} />
+      )}
     </div>
   );
 };

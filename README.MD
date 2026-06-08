@@ -23,6 +23,7 @@ This is a [fork](https://github.com/gil/super-sudoku) of [Super Sudoku](https://
 - **Solve Path**: Reveal the full sequence of logical steps from the current state to the solution.
 - **Generate Sudoku**: New button to generate sudokus for various difficulties.
 - **Import Sudoku**: New button to import sudoku into a collection.
+- **IndexedDB**: We now support much larger collections.
 - **Bug Fixes**: Various bug fixes.
 
 **Important:** Because of the new dependency on HoDoKu-ts, this project needs to be relicensed as GPL-3.0 so most of the new features unfortunately cannot be pushed upstream.

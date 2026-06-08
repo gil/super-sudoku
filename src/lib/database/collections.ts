@@ -36,8 +36,11 @@ export interface Collection extends CollectionIndex {
 interface CollectionRepository {
   getCollections(): CollectionIndex[];
   getCollection(collectionId: string): Collection;
-  saveCollection(collection: Collection): void;
-  removeCollection(collectionId: string): void;
+  // Reads are synchronous (served from cache); writes update the cache synchronously and the
+  // returned promise resolves once the change is persisted to IndexedDB (or rejects, e.g. on
+  // a quota error, so callers can surface it).
+  saveCollection(collection: Collection): Promise<void>;
+  removeCollection(collectionId: string): Promise<void>;
 }
 
 // Collections are persisted in IndexedDB so we are not bound by the ~5MB localStorage
@@ -48,7 +51,7 @@ interface CollectionRepository {
 // asynchronously through a serialized queue.
 
 const DB_NAME = "super-sudoku";
-const DB_VERSION = 1;
+const DB_VERSION = 2;
 const STORE_NAME = "collections";
 
 let dbPromise: Promise<IDBDatabase> | null = null;
@@ -98,11 +101,13 @@ async function idbDelete(collectionId: string): Promise<void> {
 
 const cache = new Map<string, Collection>();
 
+// Serializes writes so concurrent saves keep order. Returns the promise for this specific
+// operation (which may reject) while keeping the shared chain alive regardless of failures.
 let persistQueue: Promise<unknown> = Promise.resolve();
-function enqueuePersist(op: () => Promise<unknown>): void {
-  persistQueue = persistQueue.then(op).catch((error) => {
-    console.error("Failed to persist collection to IndexedDB", error);
-  });
+function enqueuePersist(op: () => Promise<void>): Promise<void> {
+  const run = persistQueue.then(op);
+  persistQueue = run.catch(() => {});
+  return run;
 }
 
 // Loads all collections into the in-memory cache. Must be awaited before the app renders.
@@ -131,12 +136,12 @@ export const collectionRepository: CollectionRepository = {
     }
     return collection;
   },
-  saveCollection(collection: Collection): void {
+  saveCollection(collection: Collection): Promise<void> {
     cache.set(collection.id, collection);
-    enqueuePersist(() => idbPut(collection));
+    return enqueuePersist(() => idbPut(collection));
   },
-  removeCollection(collectionId: string): void {
+  removeCollection(collectionId: string): Promise<void> {
     cache.delete(collectionId);
-    enqueuePersist(() => idbDelete(collectionId));
+    return enqueuePersist(() => idbDelete(collectionId));
   },
 };

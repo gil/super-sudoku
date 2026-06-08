@@ -103,17 +103,34 @@ export function useSudokuCollections() {
   const addCollection = useCallback((collection: string) => {
     const collectionId = crypto.randomUUID();
     const newCollection = {id: collectionId, name: collection, sudokusRaw: ""};
-    collectionRepository.saveCollection(newCollection);
+    collectionRepository.saveCollection(newCollection).catch((error) => {
+      console.error("Failed to save collection", error);
+    });
     setCollections(getCollections());
     return newCollection;
   }, []);
 
-  const addSudokuToCollection = useCallback((collectionId: string, sudoku: SimpleSudoku) => {
+  const addSudokuToCollection = useCallback(async (collectionId: string, sudoku: SimpleSudoku) => {
     const stringifiedSudoku = stringifySudoku(sudoku);
     const collection = collectionRepository.getCollection(collectionId);
     const newSudokusRaw =
       collection.sudokusRaw.length > 0 ? collection.sudokusRaw + "\n" + stringifiedSudoku : stringifiedSudoku;
-    collectionRepository.saveCollection({
+    await collectionRepository.saveCollection({
+      ...collection,
+      sudokusRaw: newSudokusRaw,
+    });
+    setCollections(getCollections());
+    setVersion((v) => v + 1);
+  }, []);
+
+  const addSudokusToCollection = useCallback(async (collectionId: string, sudokus: SimpleSudoku[]) => {
+    if (sudokus.length === 0) {
+      return;
+    }
+    const stringified = sudokus.map(stringifySudoku);
+    const collection = collectionRepository.getCollection(collectionId);
+    const newSudokusRaw = [collection.sudokusRaw, ...stringified].filter((s) => s.length > 0).join("\n");
+    await collectionRepository.saveCollection({
       ...collection,
       sudokusRaw: newSudokusRaw,
     });
@@ -151,7 +168,9 @@ export function useSudokuCollections() {
   );
 
   const removeCollection = (collectionId: string) => {
-    collectionRepository.removeCollection(collectionId);
+    collectionRepository.removeCollection(collectionId).catch((error) => {
+      console.error("Failed to remove collection", error);
+    });
     setCollections(getCollections());
   };
 
@@ -160,6 +179,7 @@ export function useSudokuCollections() {
     addCollection,
     removeCollection,
     addSudokuToCollection,
+    addSudokusToCollection,
     isBaseCollection,
     getCollection,
     activeCollection,
