@@ -1,0 +1,37 @@
+[
+  {
+    "file": "SUPER160.txt",
+    "name": "Superior 160",
+    "description": "Weekly hard puzzles from the Times (London newspaper) and similar publications."
+  },
+  {
+    "file": "No_One_Trick_Ponies_250.txt",
+    "name": "No One Trick Ponies 250",
+    "description": "Hard or higher level puzzles that each need more than one solving technique."
+  },
+  {
+    "file": "Almost Daily Nightmare_400.txt",
+    "name": "Almost Daily Nightmare 400",
+    "description": "Less than Nightmare level, from Sudocue.net."
+  },
+  {
+    "file": "learningcurve_2500.txt",
+    "name": "Learning Curve 2500",
+    "description": "Puzzles that gradually get tougher. A day-one beginner should manage the first one."
+  },
+  {
+    "file": "Tarek_Pearly6000.txt",
+    "name": "Tarek's Pearly 6000",
+    "description": "Extreme puzzles compiled by the author."
+  },
+  {
+    "file": "17puz49158.txt",
+    "name": "17 Clue Puzzles",
+    "description": "All 17-clue puzzles (49158) — the minimum number of clues for a proper sudoku."
+  },
+  {
+    "file": "Top_50K_Toughest.txt",
+    "name": "Top 50K Toughest",
+    "description": "Really tough, designed to test sudoku solvers, but solvable by talented humans."
+  }
+]

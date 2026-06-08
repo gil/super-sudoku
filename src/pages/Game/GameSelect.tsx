@@ -14,6 +14,7 @@ import {localStoragePlayedSudokuRepository, StoredPlayedSudokuState} from "src/l
 import {Collection, translateCollectionName} from "src/lib/database/collections";
 import NewSudoku from "./NewSudoku";
 import ImportSudokuModal from "src/components/ImportSudokuModal";
+import ImportCollectionModal from "src/components/ImportCollectionModal";
 import {useTranslation} from "react-i18next";
 import {SudokuRating, useSudokuRatings} from "src/utils/useSudokuRatings";
 
@@ -332,10 +333,18 @@ const GameSelect: React.FC = () => {
   };
 
   const [showImportModal, setShowImportModal] = useState(false);
+  const [showImportCollectionModal, setShowImportCollectionModal] = useState(false);
 
   const importSudokus = async (sudokus: SimpleSudoku[]) => {
     await addSudokusToCollection(activeCollection.id, sudokus);
     setShowNewSudokuComponent(false);
+  };
+
+  const importCollection = async (name: string, sudokus: SimpleSudoku[]) => {
+    const newCollection = addCollection(name);
+    await addSudokusToCollection(newCollection.id, sudokus);
+    setActiveCollectionId(newCollection.id);
+    setPage(0);
   };
 
   const [showNewSudokuComponent, setShowNewSudokuComponent] = useState(false);
@@ -391,6 +400,9 @@ const GameSelect: React.FC = () => {
           >
             {t("add_new_collection")}
           </TabItem>
+          <TabItem active={false} onClick={() => setShowImportCollectionModal(true)}>
+            {t("import_collection")}
+          </TabItem>
         </div>
       </div>
       {!isBaseCollectionLocal && (
@@ -445,6 +457,13 @@ const GameSelect: React.FC = () => {
       {pageCount > 1 && <PageSelector page={page} pageCount={pageCount} setPage={setPage} />}
       {showImportModal && (
         <ImportSudokuModal onImport={importSudokus} onClose={() => setShowImportModal(false)} />
+      )}
+      {showImportCollectionModal && (
+        <ImportCollectionModal
+          onImport={importCollection}
+          onClose={() => setShowImportCollectionModal(false)}
+          existingNames={collections.map((c) => c.name)}
+        />
       )}
     </div>
   );
