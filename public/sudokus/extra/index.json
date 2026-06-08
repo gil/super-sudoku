@@ -33,5 +33,30 @@
     "file": "Top_50K_Toughest.txt",
     "name": "Top 50K Toughest",
     "description": "Really tough, designed to test sudoku solvers, but solvable by talented humans."
+  },
+  {
+    "file": "legacy-easy.txt",
+    "name": "Legacy Easy",
+    "description": "Legacy \"Easy\" set from Super Sudoku, replaced due to difficulty levels not being reliable."
+  },
+  {
+    "file": "legacy-medium.txt",
+    "name": "Legacy Medium",
+    "description": "Legacy \"Medium\" set from Super Sudoku, replaced due to difficulty levels not being reliable."
+  },
+  {
+    "file": "legacy-hard.txt",
+    "name": "Legacy Hard",
+    "description": "Legacy \"Hard\" set from Super Sudoku, replaced due to difficulty levels not being reliable."
+  },
+  {
+    "file": "legacy-expert.txt",
+    "name": "Legacy Expert",
+    "description": "Legacy \"Expert\" set from Super Sudoku, replaced due to difficulty levels not being reliable."
+  },
+  {
+    "file": "legacy-evil.txt",
+    "name": "Legacy Evil",
+    "description": "Legacy \"Evil\" set from Super Sudoku, replaced due to difficulty levels not being reliable."
   }
 ]

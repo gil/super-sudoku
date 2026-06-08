@@ -22,6 +22,7 @@
     "generate-hard-sudokus": "ts-node --project ./tsconfig.json ./scripts/generate_sudokus.ts -d hard -n 500",
     "generate-expert-sudokus": "ts-node --project ./tsconfig.json ./scripts/generate_sudokus.ts -d expert -n 500",
     "generate-evil-sudokus": "ts-node --project ./tsconfig.json ./scripts/generate_sudokus.ts -d evil -n 500",
+    "generate-hodoku": "vite-node ./scripts/generate_sudokus_hodoku.ts",
     "read-sudokus": "ts-node --project ./tsconfig.json ./scripts/read_sudokus.ts"
   },
   "keywords": [
