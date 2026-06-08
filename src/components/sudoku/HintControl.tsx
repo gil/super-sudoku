@@ -53,7 +53,7 @@ const HintControl: React.FC<{flow: HintFlow}> = ({flow}) => {
         {t("hint_btn")}
       </Button>
       {stage !== "idle" && (
-        <div className="absolute bottom-full right-0 z-40 mb-2 w-64 rounded-md bg-white p-4 text-left text-black shadow-lg dark:bg-gray-700 dark:text-white">
+        <div className="absolute top-full right-0 z-40 mt-2 w-64 rounded-md bg-white p-4 text-left text-black shadow-lg dark:bg-gray-700 dark:text-white">
           <button
             onClick={close}
             aria-label={t("close")}
