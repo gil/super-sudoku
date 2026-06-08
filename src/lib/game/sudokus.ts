@@ -8,7 +8,7 @@ import evilSudokus from "../../../sudokus/evil.txt?raw";
 import {parseSudoku, stringifySudoku} from "src/lib/engine/utility";
 import {solve} from "src/lib/engine/solverAC3";
 import {useCallback, useMemo, useState} from "react";
-import {BaseCollection, Collection, CollectionIndex, localStorageCollectionRepository} from "../database/collections";
+import {BaseCollection, Collection, CollectionIndex, collectionRepository} from "../database/collections";
 
 export interface SudokuRaw {
   iterations: number;
@@ -86,7 +86,7 @@ export const START_SUDOKU = getSudokusPaginated(START_SUDOKU_COLLECTION, START_S
 
 export function getCollections() {
   const baseCollections = Object.keys(BASE_SUDOKU_COLLECTIONS);
-  const collections = localStorageCollectionRepository.getCollections();
+  const collections = collectionRepository.getCollections();
   return [...baseCollections.map((collection) => ({id: collection, name: collection})), ...collections];
 }
 
@@ -103,17 +103,17 @@ export function useSudokuCollections() {
   const addCollection = useCallback((collection: string) => {
     const collectionId = crypto.randomUUID();
     const newCollection = {id: collectionId, name: collection, sudokusRaw: ""};
-    localStorageCollectionRepository.saveCollection(newCollection);
+    collectionRepository.saveCollection(newCollection);
     setCollections(getCollections());
     return newCollection;
   }, []);
 
   const addSudokuToCollection = useCallback((collectionId: string, sudoku: SimpleSudoku) => {
     const stringifiedSudoku = stringifySudoku(sudoku);
-    const collection = localStorageCollectionRepository.getCollection(collectionId);
+    const collection = collectionRepository.getCollection(collectionId);
     const newSudokusRaw =
       collection.sudokusRaw.length > 0 ? collection.sudokusRaw + "\n" + stringifiedSudoku : stringifiedSudoku;
-    localStorageCollectionRepository.saveCollection({
+    collectionRepository.saveCollection({
       ...collection,
       sudokusRaw: newSudokusRaw,
     });
@@ -131,14 +131,14 @@ export function useSudokuCollections() {
         };
       }
       try {
-        return localStorageCollectionRepository.getCollection(collectionIdOrName);
+        return collectionRepository.getCollection(collectionIdOrName);
       } catch {
         // The game state / URL store the collection name, not the id, so fall back to a name lookup.
-        const match = localStorageCollectionRepository.getCollections().find((c) => c.name === collectionIdOrName);
+        const match = collectionRepository.getCollections().find((c) => c.name === collectionIdOrName);
         if (!match) {
           throw new Error("Collection not found");
         }
-        return localStorageCollectionRepository.getCollection(match.id);
+        return collectionRepository.getCollection(match.id);
       }
     },
     [isBaseCollection],
@@ -151,7 +151,7 @@ export function useSudokuCollections() {
   );
 
   const removeCollection = (collectionId: string) => {
-    localStorageCollectionRepository.removeCollection(collectionId);
+    collectionRepository.removeCollection(collectionId);
     setCollections(getCollections());
   };
 

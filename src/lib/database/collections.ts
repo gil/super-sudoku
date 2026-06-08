@@ -40,65 +40,103 @@ interface CollectionRepository {
   removeCollection(collectionId: string): void;
 }
 
-// The collections have an id, name and a list of sudokus.
-// We do not want to parse the whole sudokus, just to show an index of the sudokus.
-// That's why we save the name and and sudokus in different local storage keys.
-const STORAGE_COLLECTION_SUDOKUS_PREFIX = "super_sudoku_collections_sudokus_";
-const STORAGE_COLLECTION_NAMES_PREFIX = "super_sudoku_collections_names_";
+// Collections are persisted in IndexedDB so we are not bound by the ~5MB localStorage
+// quota and can hold large imported datasets. To keep the rest of the app synchronous
+// (state initialisation, useMemo selectors, paginated parsing) we mirror IndexedDB in an
+// in-memory cache that is hydrated once at startup via `hydrateCollections`. Reads hit the
+// cache synchronously; writes update the cache synchronously and are flushed to IndexedDB
+// asynchronously through a serialized queue.
 
-function createCollectionSudokusKey(collectionId: string) {
-  return STORAGE_COLLECTION_SUDOKUS_PREFIX + collectionId;
+const DB_NAME = "super-sudoku";
+const DB_VERSION = 1;
+const STORE_NAME = "collections";
+
+let dbPromise: Promise<IDBDatabase> | null = null;
+
+function openDB(): Promise<IDBDatabase> {
+  if (dbPromise) {
+    return dbPromise;
+  }
+  dbPromise = new Promise((resolve, reject) => {
+    const request = indexedDB.open(DB_NAME, DB_VERSION);
+    request.onupgradeneeded = () => {
+      const db = request.result;
+      if (!db.objectStoreNames.contains(STORE_NAME)) {
+        db.createObjectStore(STORE_NAME, {keyPath: "id"});
+      }
+    };
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
+  return dbPromise;
 }
 
-function createCollectionNamesKey(collectionId: string) {
-  return STORAGE_COLLECTION_NAMES_PREFIX + collectionId;
+function promisifyRequest<T>(request: IDBRequest<T>): Promise<T> {
+  return new Promise((resolve, reject) => {
+    request.onsuccess = () => resolve(request.result);
+    request.onerror = () => reject(request.error);
+  });
 }
 
-export const localStorageCollectionRepository: CollectionRepository = {
+async function idbGetAll(): Promise<Collection[]> {
+  const db = await openDB();
+  const store = db.transaction(STORE_NAME, "readonly").objectStore(STORE_NAME);
+  return promisifyRequest(store.getAll() as IDBRequest<Collection[]>);
+}
+
+async function idbPut(collection: Collection): Promise<void> {
+  const db = await openDB();
+  const store = db.transaction(STORE_NAME, "readwrite").objectStore(STORE_NAME);
+  await promisifyRequest(store.put(collection));
+}
+
+async function idbDelete(collectionId: string): Promise<void> {
+  const db = await openDB();
+  const store = db.transaction(STORE_NAME, "readwrite").objectStore(STORE_NAME);
+  await promisifyRequest(store.delete(collectionId));
+}
+
+const cache = new Map<string, Collection>();
+
+let persistQueue: Promise<unknown> = Promise.resolve();
+function enqueuePersist(op: () => Promise<unknown>): void {
+  persistQueue = persistQueue.then(op).catch((error) => {
+    console.error("Failed to persist collection to IndexedDB", error);
+  });
+}
+
+// Loads all collections into the in-memory cache. Must be awaited before the app renders.
+export async function hydrateCollections(): Promise<void> {
+  cache.clear();
+  try {
+    const stored = await idbGetAll();
+    for (const collection of stored) {
+      cache.set(collection.id, collection);
+    }
+  } catch (error) {
+    // IndexedDB can be unavailable (e.g. private browsing). The app still works with the
+    // bundled base collections; user collections just won't persist this session.
+    console.error("Failed to hydrate collections from IndexedDB", error);
+  }
+}
+
+export const collectionRepository: CollectionRepository = {
   getCollections(): CollectionIndex[] {
-    const collectionNameKeys = Object.keys(localStorage).filter((key) =>
-      key.startsWith(STORAGE_COLLECTION_NAMES_PREFIX),
-    );
-
-    return collectionNameKeys
-      .map((collectionNameKey) => {
-        const collectionName = localStorage.getItem(collectionNameKey);
-        if (!collectionName) {
-          return null;
-        }
-
-        const collectionId = collectionNameKey.replace(STORAGE_COLLECTION_NAMES_PREFIX, "");
-        const result: CollectionIndex = {
-          id: collectionId,
-          name: collectionName,
-        };
-        return result;
-      })
-      .filter((collection) => collection !== null);
+    return [...cache.values()].map(({id, name}) => ({id, name}));
   },
   getCollection(collectionId: string): Collection {
-    const collectionSudokus = localStorage.getItem(createCollectionSudokusKey(collectionId));
-    if (collectionSudokus === null) {
+    const collection = cache.get(collectionId);
+    if (!collection) {
       throw new Error("Collection not found");
     }
-
-    const collectionName = localStorage.getItem(createCollectionNamesKey(collectionId));
-    if (collectionName === null) {
-      throw new Error("Collection not found");
-    }
-
-    return {
-      id: collectionId,
-      name: collectionName,
-      sudokusRaw: collectionSudokus,
-    };
+    return collection;
   },
   saveCollection(collection: Collection): void {
-    localStorage.setItem(createCollectionSudokusKey(collection.id), collection.sudokusRaw);
-    localStorage.setItem(createCollectionNamesKey(collection.id), collection.name);
+    cache.set(collection.id, collection);
+    enqueuePersist(() => idbPut(collection));
   },
   removeCollection(collectionId: string): void {
-    localStorage.removeItem(createCollectionSudokusKey(collectionId));
-    localStorage.removeItem(createCollectionNamesKey(collectionId));
+    cache.delete(collectionId);
+    enqueuePersist(() => idbDelete(collectionId));
   },
 };
