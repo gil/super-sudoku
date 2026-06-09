@@ -15,6 +15,7 @@ import {Collection, translateCollectionName} from "src/lib/database/collections"
 import NewSudoku from "./NewSudoku";
 import ImportSudokuModal from "src/components/ImportSudokuModal";
 import ImportCollectionModal from "src/components/ImportCollectionModal";
+import ExportSudokuModal from "src/components/ExportSudokuModal";
 import {useTranslation} from "react-i18next";
 import {SudokuRating, useSudokuRatings} from "src/utils/useSudokuRatings";
 
@@ -334,6 +335,7 @@ const GameSelect: React.FC = () => {
 
   const [showImportModal, setShowImportModal] = useState(false);
   const [showImportCollectionModal, setShowImportCollectionModal] = useState(false);
+  const [showExportModal, setShowExportModal] = useState(false);
 
   const importSudokus = async (sudokus: SimpleSudoku[]) => {
     await addSudokusToCollection(activeCollection.id, sudokus);
@@ -419,6 +421,7 @@ const GameSelect: React.FC = () => {
               <Button onClick={() => setShowNewSudokuComponent(false)}>{t("close_new_sudoku_creator")}</Button>
             )}
             <Button onClick={() => setShowImportModal(true)}>{t("import_sudoku")}</Button>
+            <Button onClick={() => setShowExportModal(true)}>{t("export_sudoku")}</Button>
             <Button onClick={generateSudokuLocal} disabled={isGenerating}>
               {isGenerating ? t("generate_sudoku_loading") : t("generate_sudoku")}
             </Button>
@@ -463,6 +466,13 @@ const GameSelect: React.FC = () => {
           onImport={importCollection}
           onClose={() => setShowImportCollectionModal(false)}
           existingNames={collections.map((c) => c.name)}
+        />
+      )}
+      {showExportModal && (
+        <ExportSudokuModal
+          collectionName={activeCollection.name}
+          sudokusRaw={activeCollection.sudokusRaw}
+          onClose={() => setShowExportModal(false)}
         />
       )}
     </div>
