@@ -91,6 +91,19 @@
     }
   },
   {
+    "file": "nikoli_100.txt",
+    "name": "Nikoli 100",
+    "description": "Beautiful handmade Sudoku puzzles designed by Nikoli, the Japanese puzzle company that popularized Sudoku in the 1980s. The collection was curated in partnership with Nikoli as part of Sudoku-Bench, a benchmark for evaluating the reasoning capabilities of large language models.",
+    "total": 100,
+    "difficulties": {
+      "easy": 49,
+      "medium": 44,
+      "hard": 7,
+      "unfair": 0,
+      "extreme": 0
+    }
+  },
+  {
     "file": "legacy-easy.txt",
     "name": "Legacy Easy",
     "description": "Legacy \"Easy\" set from Super Sudoku, replaced due to difficulty levels not being reliable.",
