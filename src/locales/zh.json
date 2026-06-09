@@ -114,6 +114,8 @@
   "hint_tech_LOCKED_PAIR": "宫与线交叠处的两个格共用两个候选数，可在别处删除它们。",
   "hint_tech_LOCKED_TRIPLE": "宫与线交叠处的三个格共用三个候选数，可在别处删除它们。",
   "analyze": "分析",
+  "learn": "学习",
+  "learn_disclaimer": "重要提示：这些指南借鉴自 <hodoku>HoDoKu</hodoku> 网站，这是解题技巧的优秀资源。文中提到的某些功能和引用是 HoDoKu 特有的，可能不适用于本应用。",
   "solve": "求解",
   "analyze_title": "谜题分析",
   "analyze_difficulty": "难度",

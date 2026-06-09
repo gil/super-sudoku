@@ -27,6 +27,7 @@ import {useEffect} from "react";
 import {CellCoordinates, SimpleSudoku} from "src/lib/engine/types";
 import {DarkModeButton} from "src/components/DarkModeButton";
 import AnalyzeModal from "src/components/AnalyzeModal";
+import LearnModal from "src/components/LearnModal";
 import SolvePathPanel from "src/components/SolvePathPanel";
 import {analyzeSudoku, solveSteps, SolveStep, SudokuAnalysis} from "src/lib/game/analyze";
 import LanguageSelector from "src/components/LanguageSelector";
@@ -244,6 +245,18 @@ const AnalyzeButton: React.FC<{sudoku: SudokuState["current"]}> = ({sudoku}) => 
     <>
       <Button onClick={analyze}>{t("analyze")}</Button>
       {analysis && <AnalyzeModal analysis={analysis} onClose={() => setAnalysis(null)} />}
+    </>
+  );
+};
+
+const LearnButton: React.FC = () => {
+  const [open, setOpen] = React.useState(false);
+  const {t} = useTranslation();
+
+  return (
+    <>
+      <Button onClick={() => setOpen(true)}>{t("learn")}</Button>
+      {open && <LearnModal onClose={() => setOpen(false)} />}
     </>
   );
 };
@@ -474,6 +487,7 @@ const GameInner: React.FC<{
               <div className="flex gap-2">
                 <LanguageSelector />
                 <DarkModeButton />
+                <LearnButton />
                 <AnalyzeButton sudoku={sudokuState.current} />
                 <Button active={showSolvePath} onClick={handleSolvePath}>
                   {t("solve")}

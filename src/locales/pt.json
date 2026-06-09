@@ -114,6 +114,8 @@
   "hint_tech_LOCKED_PAIR": "Duas células na interseção de um bloco e uma linha compartilham dois candidatos, eliminando-os em outros lugares.",
   "hint_tech_LOCKED_TRIPLE": "Três células na interseção de um bloco e uma linha compartilham três candidatos, eliminando-os em outros lugares.",
   "analyze": "Analisar",
+  "learn": "Aprender",
+  "learn_disclaimer": "Importante: Estes guias foram retirados do site <hodoku>HoDoKu</hodoku>, uma excelente fonte de técnicas de resolução. Alguns recursos e referências mencionados são específicos do HoDoKu e podem não se aplicar a este aplicativo.",
   "solve": "Resolver",
   "analyze_title": "Análise do quebra-cabeça",
   "analyze_difficulty": "Dificuldade",

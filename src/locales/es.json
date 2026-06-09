@@ -114,6 +114,8 @@
   "hint_tech_LOCKED_PAIR": "Dos celdas en la intersección de una caja y una línea comparten dos candidatos, eliminándolos en otros lugares.",
   "hint_tech_LOCKED_TRIPLE": "Tres celdas en la intersección de una caja y una línea comparten tres candidatos, eliminándolos en otros lugares.",
   "analyze": "Analizar",
+  "learn": "Aprender",
+  "learn_disclaimer": "Importante: Estas guías fueron tomadas del sitio web <hodoku>HoDoKu</hodoku>, una excelente fuente de técnicas de resolución. Algunas funciones y referencias mencionadas son específicas de HoDoKu y pueden no aplicarse a esta aplicación.",
   "solve": "Resolver",
   "analyze_title": "Análisis del puzle",
   "analyze_difficulty": "Dificultad",

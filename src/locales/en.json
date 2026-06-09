@@ -123,6 +123,8 @@
   "hint_tech_LOCKED_PAIR": "Two cells in the overlap of a box and a line share two candidates, eliminating them elsewhere.",
   "hint_tech_LOCKED_TRIPLE": "Three cells in the overlap of a box and a line share three candidates, eliminating them elsewhere.",
   "analyze": "Analyze",
+  "learn": "Learn",
+  "learn_disclaimer": "Important: These guides were borrowed from the <hodoku>HoDoKu</hodoku> website, an excellent source of solving techniques. Some mentioned features and references are specific to HoDoKu and may not apply to this app.",
   "solve": "Solve",
   "analyze_title": "Puzzle Analysis",
   "analyze_difficulty": "Difficulty",

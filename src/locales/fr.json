@@ -113,6 +113,8 @@
   "hint_tech_LOCKED_PAIR": "Deux cases à l'intersection d'une région et d'une ligne partagent deux candidats, les éliminant ailleurs.",
   "hint_tech_LOCKED_TRIPLE": "Trois cases à l'intersection d'une région et d'une ligne partagent trois candidats, les éliminant ailleurs.",
   "analyze": "Analyser",
+  "learn": "Apprendre",
+  "learn_disclaimer": "Important : Ces guides ont été empruntés au site <hodoku>HoDoKu</hodoku>, une excellente source de techniques de résolution. Certaines fonctionnalités et références mentionnées sont spécifiques à HoDoKu et peuvent ne pas s'appliquer à cette application.",
   "solve": "Résoudre",
   "analyze_title": "Analyse de la grille",
   "analyze_difficulty": "Difficulté",

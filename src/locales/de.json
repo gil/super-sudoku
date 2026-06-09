@@ -114,6 +114,8 @@
   "hint_tech_LOCKED_PAIR": "Zwei Zellen in der Überschneidung von Block und Linie teilen zwei Kandidaten und eliminieren sie andernorts.",
   "hint_tech_LOCKED_TRIPLE": "Drei Zellen in der Überschneidung von Block und Linie teilen drei Kandidaten und eliminieren sie andernorts.",
   "analyze": "Analysieren",
+  "learn": "Lernen",
+  "learn_disclaimer": "Wichtig: Diese Anleitungen wurden von der <hodoku>HoDoKu</hodoku>-Website übernommen, einer ausgezeichneten Quelle für Lösungstechniken. Einige erwähnte Funktionen und Verweise sind spezifisch für HoDoKu und treffen auf diese App möglicherweise nicht zu.",
   "solve": "Lösen",
   "analyze_title": "Rätselanalyse",
   "analyze_difficulty": "Schwierigkeit",

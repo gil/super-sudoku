@@ -114,6 +114,8 @@
   "hint_tech_LOCKED_PAIR": "Due celle nell'intersezione di un riquadro e una linea condividono due candidati, eliminandoli altrove.",
   "hint_tech_LOCKED_TRIPLE": "Tre celle nell'intersezione di un riquadro e una linea condividono tre candidati, eliminandoli altrove.",
   "analyze": "Analizza",
+  "learn": "Impara",
+  "learn_disclaimer": "Importante: Queste guide sono state prese dal sito <hodoku>HoDoKu</hodoku>, un'eccellente fonte di tecniche di risoluzione. Alcune funzionalità e riferimenti menzionati sono specifici di HoDoKu e potrebbero non valere per questa app.",
   "solve": "Risolvi",
   "analyze_title": "Analisi del puzzle",
   "analyze_difficulty": "Difficoltà",
