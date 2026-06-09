@@ -6,17 +6,65 @@ import Button from "src/components/Button";
 import {parseSudoku} from "src/lib/engine/utility";
 import {SimpleSudoku} from "src/lib/engine/types";
 
+type DifficultyKey = "easy" | "medium" | "hard" | "unfair" | "extreme";
+
 interface ExtraCollection {
   file: string;
   name: string;
   description?: string;
+  total?: number;
+  difficulties?: Record<DifficultyKey, number>;
 }
+
+const DIFFICULTY_ORDER: DifficultyKey[] = ["easy", "medium", "hard", "unfair", "extreme"];
+
+const DIFFICULTY_COLOR: Record<DifficultyKey, string> = {
+  easy: "bg-green-600",
+  medium: "bg-teal-600",
+  hard: "bg-yellow-600",
+  unfair: "bg-orange-600",
+  extreme: "bg-red-600",
+};
 
 // Extra collections use both "." and "0" for empty cells; normalize to the "0" form parseSudoku expects.
 const normalizeLine = (line: string) => line.replace(/[\s.]/g, (c) => (c === "." ? "0" : ""));
 
 const CHUNK_SIZE = 1000;
 const nextFrame = () => new Promise<void>((resolve) => requestAnimationFrame(() => resolve()));
+
+const DifficultyBreakdown: React.FC<{
+  total: number;
+  difficulties: Record<DifficultyKey, number>;
+}> = ({total, difficulties}) => {
+  const {t} = useTranslation();
+  const segments = DIFFICULTY_ORDER.map((key) => ({key, count: difficulties[key] ?? 0})).filter((s) => s.count > 0);
+  if (segments.length === 0) {
+    return null;
+  }
+  return (
+    <span className="mt-2 block">
+      <span className="flex h-1.5 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
+        {segments.map(({key, count}) => (
+          <span
+            key={key}
+            className={DIFFICULTY_COLOR[key]}
+            style={{width: `${(count / total) * 100}%`}}
+            title={`${t(`difficulty_${key}`)}: ${count.toLocaleString()}`}
+          />
+        ))}
+      </span>
+      <span className="mt-1.5 flex flex-wrap gap-x-3 gap-y-1">
+        {segments.map(({key, count}) => (
+          <span key={key} className="flex items-center gap-1 text-[11px] text-gray-500 dark:text-gray-400">
+            <span className={`inline-block h-2 w-2 shrink-0 rounded-full ${DIFFICULTY_COLOR[key]}`} />
+            <span className="capitalize">{t(`difficulty_${key}`)}</span>
+            <span className="tabular-nums text-gray-400 dark:text-gray-500">{count.toLocaleString()}</span>
+          </span>
+        ))}
+      </span>
+    </span>
+  );
+};
 
 const ImportCollectionModal: React.FC<{
   onImport: (name: string, sudokus: SimpleSudoku[]) => void | Promise<void>;
@@ -143,12 +191,22 @@ const ImportCollectionModal: React.FC<{
                     disabled={isImporting || imported}
                     className="flex w-full items-start justify-between gap-3 rounded-md border border-gray-300 bg-gray-50 px-4 py-3 text-left pointer hover:border-teal-500 hover:bg-teal-50 disabled:cursor-not-allowed disabled:opacity-60 disabled:hover:border-gray-300 disabled:hover:bg-gray-50 dark:border-gray-600 dark:bg-gray-900 dark:hover:border-teal-500 dark:hover:bg-gray-700 dark:disabled:hover:border-gray-600 dark:disabled:hover:bg-gray-900"
                   >
-                    <span className="min-w-0">
-                      <span className="block font-medium">{collection.name}</span>
+                    <span className="min-w-0 flex-1">
+                      <span className="flex items-baseline justify-between gap-2">
+                        <span className="font-medium">{collection.name}</span>
+                        {collection.total !== undefined && (
+                          <span className="shrink-0 text-xs text-gray-500 dark:text-gray-400">
+                            {t("import_collection_puzzles", {count: collection.total})}
+                          </span>
+                        )}
+                      </span>
                       {collection.description && (
                         <span className="mt-0.5 block text-xs text-gray-500 dark:text-gray-400">
                           {collection.description}
                         </span>
+                      )}
+                      {collection.total !== undefined && collection.total > 0 && collection.difficulties && (
+                        <DifficultyBreakdown total={collection.total} difficulties={collection.difficulties} />
                       )}
                     </span>
                     {imported && (

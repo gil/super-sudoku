@@ -2,61 +2,157 @@
   {
     "file": "SUPER160.txt",
     "name": "Superior 160",
-    "description": "Weekly hard puzzles from the Times (London newspaper) and similar publications."
+    "description": "Weekly hard puzzles from the Times (London newspaper) and similar publications.",
+    "total": 160,
+    "difficulties": {
+      "easy": 0,
+      "medium": 0,
+      "hard": 160,
+      "unfair": 0,
+      "extreme": 0
+    }
   },
   {
     "file": "No_One_Trick_Ponies_250.txt",
     "name": "No One Trick Ponies 250",
-    "description": "Hard or higher level puzzles that each need more than one solving technique."
+    "description": "Hard or higher level puzzles that each need more than one solving technique.",
+    "total": 250,
+    "difficulties": {
+      "easy": 0,
+      "medium": 0,
+      "hard": 238,
+      "unfair": 8,
+      "extreme": 4
+    }
   },
   {
     "file": "Almost Daily Nightmare_400.txt",
     "name": "Almost Daily Nightmare 400",
-    "description": "Less than Nightmare level, from Sudocue.net."
+    "description": "Less than Nightmare level, from Sudocue.net.",
+    "total": 400,
+    "difficulties": {
+      "easy": 0,
+      "medium": 0,
+      "hard": 345,
+      "unfair": 44,
+      "extreme": 11
+    }
   },
   {
     "file": "learningcurve_2500.txt",
     "name": "Learning Curve 2500",
-    "description": "Puzzles that gradually get tougher. A day-one beginner should manage the first one."
+    "description": "Puzzles that gradually get tougher. A day-one beginner should manage the first one.",
+    "total": 2500,
+    "difficulties": {
+      "easy": 0,
+      "medium": 2330,
+      "hard": 170,
+      "unfair": 0,
+      "extreme": 0
+    }
   },
   {
     "file": "Tarek_Pearly6000.txt",
     "name": "Tarek's Pearly 6000",
-    "description": "Extreme puzzles compiled by the author."
+    "description": "Extreme puzzles compiled by the author.",
+    "total": 6000,
+    "difficulties": {
+      "easy": 0,
+      "medium": 0,
+      "hard": 0,
+      "unfair": 0,
+      "extreme": 6000
+    }
   },
   {
     "file": "17puz49158.txt",
     "name": "17 Clue Puzzles",
-    "description": "All 17-clue puzzles (49158) — the minimum number of clues for a proper sudoku."
+    "description": "All 17-clue puzzles (49158) — the minimum number of clues for a proper sudoku.",
+    "total": 49158,
+    "difficulties": {
+      "easy": 21905,
+      "medium": 19069,
+      "hard": 6303,
+      "unfair": 984,
+      "extreme": 897
+    }
   },
   {
     "file": "Top_50K_Toughest.txt",
     "name": "Top 50K Toughest",
-    "description": "Really tough, designed to test sudoku solvers, but solvable by talented humans."
+    "description": "Really tough, designed to test sudoku solvers, but solvable by talented humans.",
+    "total": 50000,
+    "difficulties": {
+      "easy": 0,
+      "medium": 65,
+      "hard": 2766,
+      "unfair": 10478,
+      "extreme": 36691
+    }
   },
   {
     "file": "legacy-easy.txt",
     "name": "Legacy Easy",
-    "description": "Legacy \"Easy\" set from Super Sudoku, replaced due to difficulty levels not being reliable."
+    "description": "Legacy \"Easy\" set from Super Sudoku, replaced due to difficulty levels not being reliable.",
+    "total": 600,
+    "difficulties": {
+      "easy": 598,
+      "medium": 0,
+      "hard": 2,
+      "unfair": 0,
+      "extreme": 0
+    }
   },
   {
     "file": "legacy-medium.txt",
     "name": "Legacy Medium",
-    "description": "Legacy \"Medium\" set from Super Sudoku, replaced due to difficulty levels not being reliable."
+    "description": "Legacy \"Medium\" set from Super Sudoku, replaced due to difficulty levels not being reliable.",
+    "total": 600,
+    "difficulties": {
+      "easy": 555,
+      "medium": 15,
+      "hard": 27,
+      "unfair": 2,
+      "extreme": 1
+    }
   },
   {
     "file": "legacy-hard.txt",
     "name": "Legacy Hard",
-    "description": "Legacy \"Hard\" set from Super Sudoku, replaced due to difficulty levels not being reliable."
+    "description": "Legacy \"Hard\" set from Super Sudoku, replaced due to difficulty levels not being reliable.",
+    "total": 600,
+    "difficulties": {
+      "easy": 436,
+      "medium": 48,
+      "hard": 84,
+      "unfair": 20,
+      "extreme": 12
+    }
   },
   {
     "file": "legacy-expert.txt",
     "name": "Legacy Expert",
-    "description": "Legacy \"Expert\" set from Super Sudoku, replaced due to difficulty levels not being reliable."
+    "description": "Legacy \"Expert\" set from Super Sudoku, replaced due to difficulty levels not being reliable.",
+    "total": 600,
+    "difficulties": {
+      "easy": 323,
+      "medium": 101,
+      "hard": 95,
+      "unfair": 38,
+      "extreme": 43
+    }
   },
   {
     "file": "legacy-evil.txt",
     "name": "Legacy Evil",
-    "description": "Legacy \"Evil\" set from Super Sudoku, replaced due to difficulty levels not being reliable."
+    "description": "Legacy \"Evil\" set from Super Sudoku, replaced due to difficulty levels not being reliable.",
+    "total": 614,
+    "difficulties": {
+      "easy": 293,
+      "medium": 144,
+      "hard": 94,
+      "unfair": 20,
+      "extreme": 63
+    }
   }
 ]
